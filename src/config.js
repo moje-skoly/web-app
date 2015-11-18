@@ -9,27 +9,28 @@ const environment = {
   }
 }[process.env.NODE_ENV || 'development'];
 
+const title = 'Naše Školy';
+const description = 'České školy.';
+
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
   app: {
-    title: 'React Redux Example',
-    description: 'All the modern best practices in one example.',
+    title: title,
+    description: description,
     meta: {
       charSet: 'utf-8',
       property: {
-        'og:site_name': 'React Redux Example',
+        'og:site_name': title,
         'og:image': 'https://react-redux.herokuapp.com/logo.jpg',
-        'og:locale': 'en_US',
-        'og:title': 'React Redux Example',
-        'og:description': 'All the modern best practices in one example.',
+        'og:locale': 'cs_CZ',
+        'og:title': title,
+        'og:description': description,
         'twitter:card': 'summary',
-        'twitter:site': '@erikras',
-        'twitter:creator': '@erikras',
-        'twitter:title': 'React Redux Example',
-        'twitter:description': 'All the modern best practices in one example.',
+        'twitter:title': title,
+        'twitter:description': description,
         'twitter:image': 'https://react-redux.herokuapp.com/logo.jpg',
         'twitter:image:width': '200',
         'twitter:image:height': '200'
