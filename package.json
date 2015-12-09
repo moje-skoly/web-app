@@ -42,8 +42,8 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "PORT": 8080,
-        "APIPORT": 3030
+        "PORT": 3000,
+        "APIPORT": 8080
       }
     },
     "start-prod-api": {
@@ -60,7 +60,7 @@
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 3000,
-        "APIPORT": 3030
+        "APIPORT": 8080
       }
     },
     "start-dev-api": {
@@ -90,6 +90,7 @@
     "history": "^1.13.0",
     "hoist-non-react-statics": "^1.0.3",
     "http-proxy": "^1.12.0",
+    "leaflet": "^0.7.7",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "lru-memoize": "^1.0.0",
@@ -102,7 +103,11 @@
     "react-bootstrap": "^0.27.3",
     "react-document-meta": "^2.0.0",
     "react-dom": "^0.14.1",
+    "react-fa": "^4.0.0",
+    "react-gmaps": "^1.2.0",
+    "react-google-maps": "^4.6.0",
     "react-inline-css": "^2.0.0",
+    "react-leaflet": "^0.9.0",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc3",
     "react-router-bootstrap": "^0.19.3",

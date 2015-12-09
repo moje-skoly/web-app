@@ -3,11 +3,12 @@ import {IndexRoute, Route} from 'react-router';
 import {
     App,
     Home,
-    Widgets,
-    About,
-    Survey,
+    Detail,
+    Comparison,
+    Filter,
     NotFound,
-  } from 'containers';
+    SchoolPreview
+  } from './pages';
 
 export default () => {
   /**
@@ -15,15 +16,20 @@ export default () => {
    */
   return (
     <Route path="/" component={App}>
-      { /* Home (main) route */ }
-      <IndexRoute component={Home}/>
+      {/* Home (main) route */}
+      <IndexRoute component={Home} />
 
-      { /* Routes */ }
-      <Route path="about" component={About}/>
-      <Route path="survey" component={Survey}/>
-      <Route path="widgets" component={Widgets}/>
+      <Route path="filter/:address/:schoolType" component={Filter}>
+        <Route path="preview/:previewId" component={SchoolPreview} />
+      </Route>
 
-      { /* Catch all route */ }
+      {/* Detail of a school */}
+      <Route path="detail/:schoolId" component={Detail} />
+
+      {/* Detail of a school */}
+      <Route path="comparison/:schoolIds" component={Comparison} />
+
+      {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />
     </Route>
   );

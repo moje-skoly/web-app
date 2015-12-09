@@ -1,0 +1,26 @@
+@import (less) '../../theme/less/colors.less';
+
+.comparisonPage {
+  padding: 50px 0;
+  background: @grayBg;
+}
+
+.comparisonRow {
+  overflow-x: scroll;
+  overflow-y: none;
+  text-align: center;
+  white-space: nowrap;
+  padding: 20px;
+}
+
+.detail {
+  display: inline-block;
+  white-space: normal;
+  width: 400px;
+  text-align: left;
+  padding: 20px;
+
+  &:nth-child(2n) {
+    background: @grayBg;
+  }
+}

@@ -1,50 +1,80 @@
 @import (less) './colors.less';
 
-.pink {
-    background: @pink;
-    color: @white;
-    text-transform: uppercase;
-    border-color: @pink;
+.button() {
+  padding: 4px 10px;
+  cursor: pointer;
+  border: 1px solid;
+  text-transform: uppercase;
 
-    &:disabled {
-        color: @white;
-        background: darken(@pink, 20%);
+  &:disabled {
+    &:hover,
+    &:focus,
+    &:active {
+      cursor: not-allowed;
     }
+  }
 
+  &:not(:disabled) {
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+.pink() {
+  .button();
+
+  background: @pink;
+  color: @white;
+  border-color: @pink;
+
+  &:disabled {
+    color: @white;
+    background: darken(@pink, 20%);
+  }
+
+  &:not(:disabled) {
     &:hover {
-        color: @white;
-        background: darken(@pink, 10%);
+      color: @white;
+      background: darken(@pink, 10%);
     }
 
     &:focus {
-        outline: none;
-        color: @white;
+      color: @white;
     }
 
     &:active {
-        outline: none;
-        background: darken(@pink, 15%);
+      background: darken(@pink, 15%);
     }
+  }
 }
 
-.green {
-    background: @greenText;
-    color: @white;
-    text-transform: uppercase;
-    border-color: @greenText;
+.green() {
+  .button();
 
+  background: @greenText;
+  color: @white;
+  border-color: @greenText;
+
+  &:not(:disabled) {
     &:hover {
       color: @white;
       background: darken(@greenText, 10%);
     }
 
     &:focus {
-      outline: none;
       color: @white;
     }
 
     &:active {
-      outline: none;
       background: darken(@greenText, 15%);
     }
+  }
+}
+
+.gray() {
+  .button();
+  color: @black;
+  background: @grayBg;
 }
