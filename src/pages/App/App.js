@@ -31,7 +31,7 @@ export default class App extends Component {
           <Grid>
             <Row>
               <Col xs={6}>
-                <h1><IndexLink to="/"><img src={logoImg} alt="Naše Školy"/></IndexLink></h1>
+                <h1><IndexLink to="/"><img src={logoImg} alt="Moje školy"/></IndexLink></h1>
               </Col>
               <Col xs={6} className="text-right">
                 <a href="#" className={styles.helpLink}>návod k používání</a>

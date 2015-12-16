@@ -25,7 +25,7 @@ export default class Filter extends Component {
     radius: PropTypes.string,
     children: PropTypes.object,
     schools: PropTypes.array.isRequired,
-    previewedSchoolId: PropTypes.string.isRequired,
+    previewedSchoolId: PropTypes.string,
 
     select: PropTypes.func.isRequired,
     unselect: PropTypes.func.isRequired,

@@ -1,4 +1,4 @@
-require('babel/polyfill');
+// require('babel-polyfill');
 
 // Webpack config for creating the production bundle.
 var path = require('path');
@@ -23,6 +23,9 @@ module.exports = {
       'font-awesome-webpack!./src/theme/font-awesome.config.prod.js',
       './src/client.js'
     ]
+  },
+  node: {
+    fs: 'empty'
   },
   output: {
     path: assetsPath,

@@ -15,9 +15,10 @@ import { Provider } from 'react-redux';
 import configureStore from '../common/store/configureStore';
 import App from '../common/containers/App';
 import { fetchCounter } from '../common/api/counter';
+import cfenv from 'cfenv';
 
 const app = new Express();
-const port = process.env.port || 3000;
+const port = cfenv.getAppEnv().port;
 
 // Use this middleware to set up hot module reloading via webpack.
 const compiler = webpack(webpackConfig);

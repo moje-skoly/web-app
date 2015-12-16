@@ -174,7 +174,7 @@
 =======
   "name": "nase-skoly-web-app",
   "version": "0.1.0",
-  "description": "The frontend to the open-data of 'Naše školy'",
+  "description": "The frontend to the open-data of 'Moje školy'",
   "scripts": {
     "start": "node server/index.js",
     "test": "mocha --compilers js:babel/register --compilers jsx:babel/register --recursive",

@@ -2,6 +2,11 @@
 require('../server.babel'); // babel registration (runtime transpilation for node)
 var path = require('path');
 var rootDir = path.resolve(__dirname, '..');
+
+// ask the IBM Bluemix for the port number
+var cfenv = require('cfenv');
+process.env.PORT = cfenv.getAppEnv().port || 3000;
+
 /**
  * Define isomorphic constants.
  */

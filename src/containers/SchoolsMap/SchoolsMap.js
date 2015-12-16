@@ -22,7 +22,7 @@ const SchoolsMap = ({
   return (
     <Map
       className={styles.map}
-      bounds={getPosition(schools[0])}
+      center={getPosition(schools[0])}
       zoom={16}
       >
       <TileLayer

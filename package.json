@@ -1,7 +1,7 @@
 {
   "name": "nase-skoly-web-app",
   "version": "0.1.0",
-  "description": "The frontend to the open-data of 'Naše školy'",
+  "description": "The frontend to the open-data of 'Moje školy'",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,35 +23,22 @@
   ],
   "main": "bin/server.js",
   "scripts": {
-    "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
-    "start-prod": "node ./node_modules/better-npm-run start-prod",
-    "start-prod-api": "node ./node_modules/better-npm-run start-prod-api",
+    "start": "forever ./bin/server.js",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "postinstall": "webpack --display-error-details --config webpack/prod.config.js",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
-    "start-dev-api": "node ./node_modules/better-npm-run start-dev-api",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
-    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
+    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\"",
     "test": "karma start",
     "test-node": "./node_modules/mocha/bin/mocha ./api/**/__tests__/*-test.js --compilers js:babel-core/register"
   },
   "betterScripts": {
-    "start-prod": {
-      "command": "node ./bin/server.js",
-      "env": {
-        "NODE_PATH": "./src",
-        "NODE_ENV": "production",
-        "PORT": 3000,
-        "APIPORT": 8080
-      }
-    },
     "start-prod-api": {
       "command": "node ./bin/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
-        "APIPORT": 3030
+        "APIPORT": 80
       }
     },
     "start-dev": {
@@ -60,15 +47,7 @@
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 3000,
-        "APIPORT": 8080
-      }
-    },
-    "start-dev-api": {
-      "command": "node ./bin/api.js",
-      "env": {
-        "NODE_PATH": "./api",
-        "NODE_ENV": "development",
-        "APIPORT": 3030
+        "APIPORT": 80
       }
     },
     "watch-client": {
@@ -80,14 +59,17 @@
     }
   },
   "dependencies": {
-    "babel": "~5.8.29",
+    "babel": "^6.3.13",
     "babel-plugin-typecheck": "^2.0.0",
+    "babel-polyfill": "^6.3.14",
     "body-parser": "^1.14.1",
+    "cfenv": "^1.0.3",
     "compression": "^1.6.0",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "file-loader": "^0.8.4",
-    "history": "^1.13.0",
+    "forever": "^0.15.1",
+    "history": "~1.13.0",
     "hoist-non-react-statics": "^1.0.3",
     "http-proxy": "^1.12.0",
     "leaflet": "^0.7.7",

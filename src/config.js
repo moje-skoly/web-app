@@ -1,22 +1,14 @@
-require('babel/polyfill');
+// require('babel-polyfill');
 
-const environment = {
-  development: {
-    isProduction: false
-  },
-  production: {
-    isProduction: true
-  }
-}[process.env.NODE_ENV || 'development'];
-
-const title = 'Naše Školy';
+const title = 'Moje Školy';
 const description = 'České školy.';
 
-module.exports = Object.assign({
-  host: process.env.HOST || 'localhost',
-  port: process.env.PORT,
-  apiHost: process.env.APIHOST || 'localhost',
-  apiPort: process.env.APIPORT,
+module.exports = {
+  isProduction: (process.env.NODE_ENV || 'production') === 'production',
+  host: process.env.HOST || '0.0.0.0',
+  port: process.env.PORT || 80,
+  apiHost: process.env.APIHOST || 'api.mojeskoly.cz',
+  apiPort: process.env.APIPORT || 80,
   app: {
     title: title,
     description: description,
@@ -37,4 +29,4 @@ module.exports = Object.assign({
       }
     }
   }
-}, environment);
+};

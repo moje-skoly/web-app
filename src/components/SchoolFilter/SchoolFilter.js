@@ -80,8 +80,7 @@ export default class SchoolFilter extends Component {
 
   render() {
     const { showFilter, address, schoolType } = this.state;
-    const { loading, schoolsCount, address: oldAddress, schoolType: oldSchoolType } = this.props;
-    const hasntChanged = oldAddress === address && oldSchoolType === schoolType;
+    const { loading, schoolsCount } = this.props;
 
     return (
       <div>
@@ -104,12 +103,16 @@ export default class SchoolFilter extends Component {
 
             <h3>Typ školy</h3>
             <p className={'form-group'}>
-              <input value={schoolType} onChange={this.changeType} className={'form-control'} />
+              <select id="type" name="school_type" className={'form-control'} value={schoolType} onChange={this.changeType}>
+                <option value="Mateřská škola">Mateřská</option>
+                <option value="Základní škola">Základní</option>
+                <option value="Střední škola">Střední</option>
+              </select>
             </p>
             <hr />
             <p className={'text-right'}>
-              <button disabled={loading || hasntChanged} className={styles.filterBtn} onClick={this.onClick}>
-                {loading === true ? 'Probíhá vyhledávání...' : 'Zěnit kritéria'}
+              <button disabled={loading} className={styles.filterBtn} onClick={this.onClick}>
+                {loading === true ? 'Probíhá vyhledávání...' : 'Změnit kritéria'}
               </button>
             </p>
           </div>
