@@ -2,6 +2,7 @@ import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import {
     App,
+    About,
     Home,
     Detail,
     Comparison,
@@ -25,9 +26,13 @@ export default () => {
 
       {/* Detail of a school */}
       <Route path="detail/:schoolId" component={Detail} />
-
-      {/* Detail of a school */}
+      
+      {/* Comparison of multiple schools */}
       <Route path="comparison/:schoolIds" component={Comparison} />
+      
+
+      {/* Static pages */}
+      <Route path="o-projektu" component={About} />
 
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />

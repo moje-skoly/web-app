@@ -21,9 +21,19 @@ export default class App extends Component {
     store: PropTypes.object.isRequired
   };
 
+  menu(menuClass) {
+    return (
+      <ul className={menuClass}>
+        <li><a href="jak-vybrat">jak vybrat školu?</a></li>
+        <li><a href="o-projektu">o projektu</a></li>
+        <li><a href="kontakt">kontakt</a></li>
+      </ul>
+    );
+  }
+
   render() {
     const styles = require('./App.less');
-    const logoImg = require('../../theme/images/logo.svg');
+    const logoImg = require('../../theme/images/logo.png');
     return (
       <div>
         <DocumentMeta {...config.app}/>
@@ -34,7 +44,7 @@ export default class App extends Component {
                 <h1><IndexLink to="/"><img src={logoImg} alt="Moje školy"/></IndexLink></h1>
               </Col>
               <Col xs={6} className="text-right">
-                <a href="#" className={styles.helpLink}>návod k používání</a>
+                {this.menu('')}
               </Col>
             </Row>
           </Grid>
@@ -49,12 +59,7 @@ export default class App extends Component {
           <Grid>
             <Row>
               <Col xs={12}>
-                <ul className="pull-right">
-                  <li><a href="#">o nás</a></li>
-                  <li><a href="#">cookies</a></li>
-                  <li><a href="#">soukromí</a></li>
-                  <li><a href="#">kontakt</a></li>
-                </ul>
+                {this.menu('pull-right')}
               </Col>
             </Row>
           </Grid>

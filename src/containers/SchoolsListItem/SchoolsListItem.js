@@ -22,13 +22,15 @@ export default class SchoolsListItem extends Component {
   };
 
   getAddressString = (school) => {
+    const { address } = school.metadata;
+    if (!address) return '';
     const { street, city, postalCode } = school.metadata.address;
     return `${street}, ${postalCode} ${city}`;
   };
 
   render() {
     const { school, isSelected } = this.props;
-    const { websites = [] } = school.metadata.contact;
+    const { contact = null } = school.metadata;
     const styles = require('./SchoolsListItem.less');
     return (
       <button className={isSelected ? styles.selectedItem : styles.unselectedItem} onClick={this.onClick}>
@@ -39,7 +41,7 @@ export default class SchoolsListItem extends Component {
               <th><i className={'fa fa-map-marker'} /></th>
               <td>{this.getAddressString(school)}</td>
             </tr>
-            {websites.length >= 1
+            {contact != null && !('websites' in contact) && contact.websites.length >= 1
               && (
                 <tr>
                   <th><i className={'fa fa-link'} /></th>

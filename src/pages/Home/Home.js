@@ -6,10 +6,10 @@ import HowItWorks from '../../containers/HowItWorks/HowItWorks';
 const Home = () => {
   const styles = require('./Home.less');
   return (
-    <div>
+    <div className={styles.hideoverflow}>
       <div className={styles.homepage}>
         <h1><strong>Najděte školu</strong> pro své děti.</h1>
-        <p>Naše škola je otevřená databáze mateřských, základních a středních škol na území České republiky, kterou spravují školy a rodiče.</p>
+        <p><strong>Moje školy</strong> je databáze mateřských, základních a středních škol na území České republiky sestavená z otevřených dat veřejných institucí.</p>
       </div>
       <HomepageSearch />
       <HowItWorks />

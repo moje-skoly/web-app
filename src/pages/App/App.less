@@ -1,5 +1,26 @@
 @import (less) '../../theme/less/style.less';
 
+.menu {
+  ul {
+    li {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      a {
+        color: @black;
+      }
+
+      &:not(:first-child):before {
+        content: "|";
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
 .top {
   background: @white;
   height: 80px;
@@ -26,11 +47,14 @@
     height: 60px;
   }
 
-  .helpLink {
-    line-height: 80px;
-    text-decoration: none;
-    color: @black;
+  ul {
+    li {
+      line-height: 80px;
+      text-decoration: none;
+      color: @black;
+    }
   }
+  .menu()
 }
 
 #content {
@@ -42,22 +66,5 @@
 .bottom {
   padding: 20px 0 40px;
 
-  ul {
-    li {
-      display: inline-block;
-
-      &:not(:last-child) {
-        margin-right: 10px;
-      }
-
-      a {
-        color: @black;
-      }
-
-      &:not(:first-child):before {
-        content: "|";
-        margin-right: 10px;
-      }
-    }
-  }
+  .menu()
 }
