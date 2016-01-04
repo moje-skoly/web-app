@@ -20,6 +20,7 @@ export default function filter(state = initialState, action = {}) {
       loading: false,
       loaded: true,
       radius: action.result.radius,
+      center: action.result.location,
       schools: action.result.schools
     };
   case LOAD_FAIL:

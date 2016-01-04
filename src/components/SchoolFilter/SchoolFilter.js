@@ -104,9 +104,9 @@ export default class SchoolFilter extends Component {
             <h3>Typ školy</h3>
             <p className={'form-group'}>
               <select id="type" name="school_type" className={'form-control'} value={schoolType} onChange={this.changeType}>
-                <option value="Mateřská škola">Mateřská</option>
-                <option value="Základní škola">Základní</option>
-                <option value="Střední škola">Střední</option>
+                <option value="materska_skola">Mateřská</option>
+                <option value="zakladni_skola">Základní</option>
+                <option value="stredni_skola">Střední</option>
               </select>
             </p>
             <hr />

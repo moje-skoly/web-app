@@ -52,9 +52,9 @@ export default class HomepageSarch extends Component {
               <Col md={2} xs={6}>
                 <label htmlFor="type">Typ školy</label>
                 <select id="type" name="school_type" className="form-control" value={type} onChange={this.changeType}>
-                  <option value="Mateřská škola">Mateřská</option>
-                  <option value="Základní škola">Základní</option>
-                  <option value="Střední škola">Střední</option>
+                  <option value="materska_skola">Mateřská</option>
+                  <option value="zakladni_skola">Základní</option>
+                  <option value="stredni_skola">Střední</option>
                 </select>
               </Col>
               <Col md={2} xs={6}>
