@@ -8,7 +8,9 @@ import {
     Comparison,
     Filter,
     NotFound,
-    SchoolPreview
+    SchoolPreview,
+    How,
+    Contact
   } from './pages';
 
 export default () => {
