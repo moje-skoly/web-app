@@ -10,7 +10,7 @@ import {
     Contact,
     Filter,
     NotFound,
-    SchoolPreview
+    SchoolPreview,
   } from './pages';
 
 export default () => {

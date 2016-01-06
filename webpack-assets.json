@@ -1,6 +1,6 @@
 {
   "javascript": {
-    "main": "http://localhost:3001/dist/main-69e907768842cf449a74.js"
+    "main": "http://localhost:3001/dist/main-62d0ac3a3a224246cdc8.js"
   },
   "styles": {},
   "assets": {
@@ -91,7 +91,7 @@
       "comparisonPage": "comparisonPage___3yHZk",
       "comparisonRow": "comparisonRow___3rcgF",
       "detail": "detail___38V6Y",
-      "_style": ".comparisonPage___3yHZk {\n  padding: 50px 0;\n  background: #f3f3f3;\n}\n.comparisonRow___3rcgF {\n  overflow-x: scroll;\n  overflow-y: none;\n  text-align: center;\n  white-space: nowrap;\n  padding: 20px;\n}\n.detail___38V6Y {\n  display: inline-block;\n  white-space: normal;\n  width: 400px;\n  text-align: left;\n  padding: 20px;\n}\n.detail___38V6Y:nth-child(2n) {\n  background: #f3f3f3;\n}\n"
+      "_style": ".comparisonPage___3yHZk {\n  padding: 50px 0;\n  background: #f3f3f3;\n}\n.comparisonRow___3rcgF {\n  overflow-x: scroll;\n  overflow-y: none;\n  text-align: center;\n  white-space: nowrap;\n  padding: 20px;\n}\n.detail___38V6Y {\n  display: inline-block;\n  vertical-align: top;\n  white-space: normal;\n  width: 400px;\n  text-align: left;\n  padding: 20px;\n}\n.detail___38V6Y:nth-child(2n) {\n  background: #f3f3f3;\n}\n"
     },
     "./src/pages/Contact/Contact.less": {
       "about": "about___1jC-w",
