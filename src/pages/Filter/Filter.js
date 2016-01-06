@@ -12,6 +12,7 @@ import styles from './Filter.less';
   (state, props) => ({
     schools: state.filter.schools,
     radius: state.filter.radius,
+    center: state.filter.center,
     previewedSchoolId: state.router.params.previewId,
   }),
   (dispatch) => ({
@@ -23,6 +24,7 @@ export default class Filter extends Component {
 
   static propTypes = {
     radius: PropTypes.string,
+    center: PropTypes.object,
     children: PropTypes.object,
     schools: PropTypes.array.isRequired,
     previewedSchoolId: PropTypes.string,
@@ -47,7 +49,7 @@ export default class Filter extends Component {
   };
 
   render() {
-    const { schools, children, radius, params } = this.props;
+    const { schools, children, radius, center, params } = this.props;
     const { address, schoolType } = params;
 
     return (
@@ -62,7 +64,7 @@ export default class Filter extends Component {
             </Col>
             <Col sm={6}>
               <div className={styles.map}>
-                <SchoolsMap schools={schools} select={this.selectSchool} />
+                <SchoolsMap schools={schools} select={this.selectSchool} center={center} />
               </div>
               {children}
             </Col>

@@ -22,8 +22,10 @@ export default class SchoolsListItem extends Component {
   };
 
   getAddressString = (school) => {
-    const { address } = school.metadata;
-    if (!address) return '';
+		if (school.metadata.address === undefined) {
+			return ''; // the address is missing
+		}
+
     const { street, city, postalCode } = school.metadata.address;
     return `${street}, ${postalCode} ${city}`;
   };
@@ -31,6 +33,7 @@ export default class SchoolsListItem extends Component {
   render() {
     const { school, isSelected } = this.props;
     const { contact = null } = school.metadata;
+    const websites = school.metadata.contact !== undefined ? school.metadata.contact.websites : [];
     const styles = require('./SchoolsListItem.less');
     return (
       <button className={isSelected ? styles.selectedItem : styles.unselectedItem} onClick={this.onClick}>
