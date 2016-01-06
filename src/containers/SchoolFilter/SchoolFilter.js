@@ -12,12 +12,8 @@ import styles from './SchoolFilter.less';
     schoolsCount: state.filter.schools.length
   }),
   dispatch => ({
-    load: (address, schoolType) => {
-      dispatch(filter(address, schoolType));
-    },
-    changeUrl: (address, schoolType) => {
-      dispatch(pushState(null, `/filter/${address}/${schoolType}`));
-    }
+    load: (address, schoolType) => dispatch(filter(address, schoolType)),
+    changeUrl: (address, schoolType) => dispatch(pushState(null, `/filter/${address}/${schoolType}`))
   })
 )
 export default class SchoolFilter extends Component {
