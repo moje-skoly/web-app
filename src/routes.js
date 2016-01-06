@@ -26,10 +26,9 @@ export default () => {
 
       {/* Detail of a school */}
       <Route path="detail/:schoolId" component={Detail} />
-      
+
       {/* Comparison of multiple schools */}
       <Route path="comparison/:schoolIds" component={Comparison} />
-      
 
       {/* Static pages */}
       <Route path="o-projektu" component={About} />

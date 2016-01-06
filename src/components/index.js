@@ -1,9 +1,4 @@
-/**
- *  Point of contact for component modules
- *
- *  ie: import { CounterButton, InfoBar } from 'components';
- *
- */
-
-export InfoBar from './InfoBar/InfoBar';
+export ComparisonButton from './ComparisonButton/ComparisonButton';
+export HowItWorks from './HowItWorks/HowItWorks';
 export SchoolDetail from './SchoolDetail/SchoolDetail';
+export SchoolsMap from './SchoolsMap/SchoolsMap';
