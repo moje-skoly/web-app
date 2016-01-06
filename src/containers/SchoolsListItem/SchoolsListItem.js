@@ -53,7 +53,7 @@ export default class SchoolsListItem extends Component {
                 <tr>
                   <th><i className={'fa fa-link'} /></th>
                   <td>
-                    {websites.map(web => <a href={web} key={web}>{web}</a>)}
+                    {websites.map(web => <a href={(web.startswith('http') ? 'http://' : '') + web} key={web}>{web}</a>)}
                   </td>
                 </tr>
               )}

@@ -52,7 +52,7 @@ const SchoolsMap = ({
 SchoolsMap.propTypes = {
   schools: PropTypes.array.isRequired,
   center: PropTypes.object,
-  onMarkerClick: PropTypes.func
+  select: PropTypes.func
 };
 
 export default SchoolsMap;

@@ -29,13 +29,22 @@ export default class MetaData extends Component {
     </div>
   );
 
-  renderContact = (phoneNumbers, emails) => {
+  renderContact = (websites, phoneNumbers, emails) => {
     if (!phoneNumbers && !emails) {
       return null; // do not show even the title...
     }
 
     return (
       <div className={styles.contact}>
+        {websites && websites.length >= 1
+          && (
+            <tr>
+              <th><i className={'fa fa-link'} /></th>
+              <td>
+                {websites.map(web => <a href={(web.startswith('http') ? 'http://' : '') + web} key={web}>{web}</a>)}
+              </td>
+            </tr>
+          )}
         {phoneNumbers && (
           <Row>
             <Col xs={2} className={styles.icon}>
@@ -75,7 +84,7 @@ export default class MetaData extends Component {
 
         {contact
           && (!comparison || this.match(comparison.contact, contact) === false)
-          && this.renderContact(contact.phoneNumbers, contact.emails)}
+          && this.renderContact(contact.websites, contact.phoneNumbers, contact.emails)}
       </div>
     );
   }
