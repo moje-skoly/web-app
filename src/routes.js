@@ -32,6 +32,8 @@ export default () => {
 
       {/* Static pages */}
       <Route path="o-projektu" component={About} />
+      <Route path="jak-vybrat" component={How} />
+      <Route path="kontakt" component={Contact} />
 
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />
