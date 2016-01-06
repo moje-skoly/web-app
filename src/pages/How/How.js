@@ -10,7 +10,7 @@ const How = () => {
           <div className={styles.how}>
             <h1>Jak vybrat školu?</h1>
             <p>
-              Upřímně, není to snadné. Dejte si heřmánkový čaj a hned to půjde lépe!
+              Upřímně, není to snadné. Dejte si heřmánkový čaj a hned to půjde lépe! [reálný obsah bude doplněn brzy]
             </p>
           </div>
         </Col>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import MetaData from '../../containers/MetaData/MetaData';
 import styles from './UnitDetail.less';
 
@@ -20,19 +21,15 @@ const UnitDetail = ({
         && sections.map((section, sectionId) => (
         <div key={sectionId}>
           <h4 className={styles.sectionTitle}>{section.title}</h4>
-          <table>
-            <tbody>
-              {section.information.map((info, infoId) => {
-                const { key, value } = info;
-                return (
-                  <tr key={infoId}>
-                    <th className={styles.question}>{key}{':'}</th>
-                    <td className={styles.answer}>{value}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+            {section.information.map((info, infoId) => {
+              const { key, value } = info;
+              return (
+                <Row key={infoId} className={styles.questionRow}>
+                  <Col sm={6}><p className={styles.question}>{key}{':'}</p></Col>
+                  <Col sm={6}><p className={styles.answer}>{value}</p></Col>
+                </Row>
+              );
+            })}
         </div>
       ))}
     </div>

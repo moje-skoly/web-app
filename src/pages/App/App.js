@@ -24,9 +24,9 @@ export default class App extends Component {
   menu(menuClass) {
     return (
       <ul className={menuClass}>
-        <li><a href="jak-vybrat">jak vybrat školu?</a></li>
-        <li><a href="o-projektu">o projektu</a></li>
-        <li><a href="kontakt">kontakt</a></li>
+        <li><a href="/jak-vybrat">jak vybrat školu?</a></li>
+        <li><a href="/o-projektu">o projektu</a></li>
+        <li><a href="/kontakt">kontakt</a></li>
       </ul>
     );
   }
@@ -34,6 +34,8 @@ export default class App extends Component {
   render() {
     const styles = require('./App.less');
     const logoImg = require('../../theme/images/logo.png');
+    const nadaceVodafoneImg = require('../../theme/images/vodafone_cs.png');
+    const motejlImg = require('../../theme/images/fom.png');
     return (
       <div>
         <DocumentMeta {...config.app}/>
@@ -58,7 +60,15 @@ export default class App extends Component {
         <footer className={styles.bottom}>
           <Grid>
             <Row>
-              <Col xs={12}>
+              <Col xs={4} xsOffset={4} className={styles.sponsors}>
+                <a href="http://nadacevodafone.cz/">
+                  <img src={nadaceVodafoneImg} alt="Nadace Vodafone"/>
+                </a>
+                <a href="http://motejl.cz/">
+                  <img src={motejlImg} alt="Fond Otakara Motejla"/>
+                </a>
+              </Col>
+              <Col xs={4}>
                 {this.menu('pull-right')}
               </Col>
             </Row>

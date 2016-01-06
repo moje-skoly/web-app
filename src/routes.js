@@ -4,13 +4,13 @@ import {
     App,
     About,
     Home,
+    How,
     Detail,
     Comparison,
+    Contact,
     Filter,
     NotFound,
     SchoolPreview,
-    How,
-    Contact
   } from './pages';
 
 export default () => {
