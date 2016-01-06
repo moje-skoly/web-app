@@ -4,8 +4,10 @@ import {
     App,
     About,
     Home,
+    How,
     Detail,
     Comparison,
+    Contact,
     Filter,
     NotFound,
     SchoolPreview
