@@ -22,10 +22,10 @@ export default class SchoolsListItem extends Component {
   };
 
   getAddressString = (school) => {
-		if (school.metadata.address === undefined) {
-			return ''; // the address is missing
-		}
-		
+    if (school.metadata.address === undefined) {
+      return '(adresa nebyla uvedena)'; // the address is missing
+    }
+
     const { street, city, postalCode } = school.metadata.address;
     return `${street}, ${postalCode} ${city}`;
   };

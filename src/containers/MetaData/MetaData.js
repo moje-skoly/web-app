@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import styles from './MetaData.less';
 import { Row, Col } from 'react-bootstrap';
 
