@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from './SchoolsMap.less';
 
-const getPosition = (school) => (school.metadata.address ? school.metadata.address.location : null);
+export const getPosition = (school) => (school.metadata.address ? school.metadata.address.location : null);
 
 // const getBounds = (schools) => shools.map(school => getPosition(school));
 

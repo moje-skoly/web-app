@@ -44,7 +44,7 @@ export default class SchoolsListItem extends Component {
               <th><i className={'fa fa-map-marker'} /></th>
               <td>{this.getAddressString(school)}</td>
             </tr>
-            {contact != null && !('websites' in contact) && contact.websites.length >= 1
+            {contact != null && ('websites' in contact) && contact.websites.length >= 1
               && (
                 <tr>
                   <th><i className={'fa fa-link'} /></th>
