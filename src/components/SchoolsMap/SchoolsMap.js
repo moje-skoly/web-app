@@ -1,12 +1,8 @@
 import React, { PropTypes } from 'react';
 import styles from './SchoolsMap.less';
 
-const getPosition = (school) => (school.metadata.address ? school.metadata.address.location : null);
-
-// const getBounds = (schools) => shools.map(school => getPosition(school));
-
 const SchoolsMap = ({
-  nonFilteredSchools = [],
+  schools,
   center = null,
   select
 }) => {
@@ -15,8 +11,8 @@ const SchoolsMap = ({
     return <p><i className={'fa fa-spinner fa-spin'} /> Načítám mapu...</p>;
   }
 
-  // remove schools without given location (damaged data)
-  const schools = nonFilteredSchools.filter(school => school.metadata.address !== undefined && school.metadata.address.location !== undefined);
+  // remove schools without giv en location (damaged data)
+  const filteredSchools = schools.filter(school => school.metadata.address !== undefined && school.metadata.address.location !== undefined);
 
   const { Map, TileLayer, Marker, Popup } = require('react-leaflet');
   const onClick = school => () => {
@@ -27,7 +23,7 @@ const SchoolsMap = ({
 
   // default position is the center of Prague and a bit unzoomed
   const mapCenter = center !== null ? center : { lat: 50.0803197, lon: 14.4155353 };
-  const zoom = schools.length > 0 ? 16 : 10;
+  const zoom = filteredSchools.length > 0 ? 12 : 10;
 
   return (
     <Map
@@ -39,9 +35,9 @@ const SchoolsMap = ({
         url={'http://{s}.tile.osm.org/{z}/{x}/{y}.png'}
         attribution={'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}
         />
-      {schools.map(school => (
+      {filteredSchools.map(school => (
         <Marker
-          position={getPosition(school)}
+          position={school.metadata.address.location}
           key={school._id}
           onClick={onClick(school)}>
           <Popup>

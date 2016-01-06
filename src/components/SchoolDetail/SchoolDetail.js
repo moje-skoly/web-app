@@ -4,6 +4,7 @@ import UnitDetail from '../UnitDetail/UnitDetail';
 import ComparisonButton from '../ComparisonButton/ComparisonButton';
 import styles from './SchoolDetail.less';
 import SchoolsMap, { getPosition } from '../SchoolsMap/SchoolsMap';
+console.log(getPosition);
 
 const SchoolDetail = ({
   school
@@ -27,7 +28,7 @@ const SchoolDetail = ({
       <div className={styles.body}>
         <MetaData data={metadata} />
         <div className={styles.map}>
-          <SchoolsMap schools={[ school ]} center={getPosition(school)} />
+          <SchoolsMap schools={[ school ]} center={school.metadata.address.location} />
         </div>
         {units.map(unit => <UnitDetail schoolMetadata={metadata} unit={unit} key={unit.IZO} />)}
       </div>

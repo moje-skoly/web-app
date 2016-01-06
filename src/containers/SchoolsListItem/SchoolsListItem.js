@@ -22,13 +22,10 @@ export default class SchoolsListItem extends Component {
   };
 
   getAddressString = (school) => {
-		if (school.metadata.address === undefined) {
-			return ''; // the address is missing
-		}
-		
-		if (school.metadata.address === undefined) {
-			return ''; // the address is missing
-		}
+    if (school.metadata.address === undefined) {
+      return ''; // the address is missing
+    }
+
     if (school.metadata.address === undefined) {
       return '(adresa nebyla uvedena)'; // the address is missing
     }
@@ -51,7 +48,7 @@ export default class SchoolsListItem extends Component {
               <th><i className={'fa fa-map-marker'} /></th>
               <td>{this.getAddressString(school)}</td>
             </tr>
-            {contact != null && !('websites' in contact) && contact.websites.length >= 1
+            {contact !== null && ('websites' in contact) && contact.websites.length >= 1
               && (
                 <tr>
                   <th><i className={'fa fa-link'} /></th>

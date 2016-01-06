@@ -1,7 +1,8 @@
-import React, {Component, PropTypes} from 'react';
-import {Grid, Row, Col} from 'react-bootstrap';
-import {connect} from 'react-redux';
-import {pushState} from 'redux-router';
+import React, { Component, PropTypes } from 'react';
+import { Grid, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
+import { load as filter } from '../../redux/modules/filter';
 
 @connect((state) => ({}))
 export default class HomepageSarch extends Component {
@@ -31,9 +32,11 @@ export default class HomepageSarch extends Component {
 
   searchSchool = (event) => {
     event.preventDefault();
-    const {loc, type, canSearch} = this.state;
+    const { dispatch } = this.props;
+    const { loc, type, canSearch} = this.state;
     if (canSearch) {
-      this.props.dispatch(pushState(null, `/filter/${loc}/${type}`));
+      dispatch(filter(loc, type));
+      dispatch(pushState(null, `/filter/${loc}/${type}`));
     }
   };
 
