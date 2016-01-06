@@ -1,6 +1,6 @@
 {
   "javascript": {
-    "main": "http://localhost:3001/dist/main-71b7707af354d72c69ba.js"
+    "main": "http://localhost:3001/dist/main-c1277a8e0f954f896848.js"
   },
   "styles": {},
   "assets": {
@@ -68,7 +68,8 @@
       "unitTitle": "unitTitle___2vfYs",
       "sectionTitle": "sectionTitle___3Xj7L",
       "question": "question___1Tim1",
-      "_style": ".detail___3OVZl {\n  background: #fff;\n  padding: 0;\n}\n.header___L3wyS {\n  padding: 10px;\n  overflow: hidden;\n  border-bottom: 1px solid #f3f3f3;\n}\n.footer___3-QJ_ {\n  padding: 10px;\n  overflow: hidden;\n  border-top: 1px solid #f3f3f3;\n}\n.map___HKnqe {\n  margin: 20px 0 0;\n}\n.unit___18LCp {\n  padding: 20px 40px;\n}\n.unitTitle___2vfYs {\n  text-transform: uppercase;\n  text-align: center;\n  color: #c3c3c3;\n  font-size: 18px;\n}\n.sectionTitle___3Xj7L {\n  font-size: 18px;\n  color: #c3c3c3;\n}\n.question___1Tim1 {\n  padding-right: 10px;\n  text-align: right;\n  font-weight: bold;\n}\n"
+      "answer": "answer____OpD3",
+      "_style": ".detail___3OVZl {\n  background: #fff;\n  padding: 0;\n}\n.header___L3wyS {\n  padding: 10px;\n  overflow: hidden;\n  border-bottom: 1px solid #f3f3f3;\n}\n.footer___3-QJ_ {\n  padding: 10px;\n  overflow: hidden;\n  border-top: 1px solid #f3f3f3;\n}\n.map___HKnqe {\n  margin: 20px 0 0;\n}\n.unit___18LCp {\n  padding: 20px 40px;\n}\n.unitTitle___2vfYs {\n  text-transform: uppercase;\n  text-align: center;\n  color: #c3c3c3;\n  font-size: 18px;\n}\n.sectionTitle___3Xj7L {\n  font-size: 18px;\n  color: #c3c3c3;\n  text-align: center;\n}\n.question___1Tim1 {\n  text-align: right;\n}\n.answer____OpD3 {\n  font-weight: bold;\n}\n"
     },
     "./src/components/ComparisonButton/ComparisonButton.less": {
       "comparisonButton": "comparisonButton___1-8jE",
