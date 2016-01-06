@@ -26,7 +26,7 @@ const app = new Express();
 const server = new http.Server(app);
 
 app.use(compression());
-app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.png')));
 
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 

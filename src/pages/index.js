@@ -1,4 +1,5 @@
 export App from './App/App';
+export About from './About/About';
 export Home from './Home/Home';
 export Comparison from './Comparison/Comparison';
 export Detail from './Detail/Detail';
