@@ -20,13 +20,13 @@ const UnitDetail = ({
     case 'stredni_skola':
       return 'Střední škola';
     default:
-      return type + 'original';
+      return type;
     }
   };
 
   return (
     <div className={styles.unit}>
-      <h3 className={styles.unitTitle}>Hello {getUnitType(unitType)}</h3>
+      <h3 className={styles.unitTitle}>{getUnitType(unitType)}</h3>
       <div className={styles.body}>
         {metadata
           && <MetaData comparison={schoolMetadata} data={metadata} />}
