@@ -39,8 +39,8 @@ const UnitDetail = ({
                 const { key, value } = info;
                 return (
                   <Row key={infoId} className={styles.questionRow}>
-                    <Col sm={6}><p className={styles.question}>{key}{':'}</p></Col>
-                    <Col sm={6}><p className={styles.answer}>{value}</p></Col>
+                    <Col xs={6} className={styles.col}><p className={styles.question}>{key}{':'}</p></Col>
+                    <Col xs={6} className={styles.col}><p className={styles.answer}>{value}</p></Col>
                   </Row>
                 );
               })}

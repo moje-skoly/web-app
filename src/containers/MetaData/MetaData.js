@@ -71,9 +71,44 @@ export default class MetaData extends Component {
     );
   };
 
+  renderOther = (headmaster, founder) => {
+    return (
+      <div className={styles.other}>
+        <Row>
+          <Col xs={12}>
+            <table>
+              <tbody>
+                {headmaster && (
+                  <tr>
+                    <td>
+                      Ředitel:
+                    </td>
+                    <td>
+                      {headmaster}
+                    </td>
+                  </tr>
+                )}
+                {founder && (
+                  <tr>
+                    <td>
+                      Zřizovatel:
+                    </td>
+                    <td>
+                      {founder}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </Col>
+        </Row>
+      </div>
+    );
+  };
+
   render() {
     const { comparison, data } = this.props;
-    const { name, address, contact } = data;
+    const { name, address, contact, headmaster, founder } = data;
 
     return (
       <div className={styles.metaInfo}>
@@ -87,6 +122,10 @@ export default class MetaData extends Component {
         {contact
           && (!comparison || this.match(comparison.contact, contact) === false)
           && this.renderContact(contact.websites, contact.phoneNumbers, contact.emails)}
+
+        {(headmaster || founder)
+          && !comparison
+          && this.renderOther(headmaster.name, founder)}
       </div>
     );
   }

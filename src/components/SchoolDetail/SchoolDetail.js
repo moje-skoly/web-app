@@ -32,8 +32,6 @@ const SchoolDetail = ({
         </div>
         {units.map(unit => <UnitDetail schoolMetadata={metadata} unit={unit} key={unit.IZO} />)}
       </div>
-      <div className={styles.footer}>
-      </div>
     </div>
   );
 };

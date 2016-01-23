@@ -24,7 +24,7 @@ export default class App extends Component {
   menu(menuClass) {
     return (
       <ul className={menuClass}>
-        <li><a href="/jak-vybrat">jak vybrat školu?</a></li>
+        <li><a href="/manifest">manifest</a></li>
         <li><a href="/o-projektu">o projektu</a></li>
         <li><a href="/kontakt">kontakt</a></li>
       </ul>
@@ -45,7 +45,7 @@ export default class App extends Component {
               <Col xs={6}>
                 <h1><IndexLink to="/"><img src={logoImg} alt="Moje školy"/></IndexLink></h1>
               </Col>
-              <Col xs={6} className="text-right">
+              <Col sm={6} xs={12} className="text-right">
                 {this.menu('')}
               </Col>
             </Row>
@@ -60,7 +60,7 @@ export default class App extends Component {
         <footer className={styles.bottom}>
           <Grid>
             <Row>
-              <Col xs={4} xsOffset={4} className={styles.sponsors}>
+              <Col md={4} mdOffset={4} xs={12} className={styles.sponsors}>
                 <a href="http://nadacevodafone.cz/">
                   <img src={nadaceVodafoneImg} alt="Nadace Vodafone"/>
                 </a>
@@ -68,7 +68,7 @@ export default class App extends Component {
                   <img src={motejlImg} alt="Fond Otakara Motejla"/>
                 </a>
               </Col>
-              <Col xs={4}>
+              <Col md={4} xs={12}>
                 {this.menu('pull-right')}
               </Col>
             </Row>
