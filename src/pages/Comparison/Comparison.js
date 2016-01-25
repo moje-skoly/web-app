@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
-import SchoolDetail from '../../containers/SchoolDetail/SchoolDetail';
+import SchoolDetail from '../../components/SchoolDetail/SchoolDetail';
 import { load as loadComparison } from '../../redux/modules/comparison';
 import styles from './Comparison.less';
 

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import SchoolDetail from '../../containers/SchoolDetail/SchoolDetail';
+import SchoolDetail from '../../components/SchoolDetail/SchoolDetail';
 import { connect } from 'react-redux';
 import { load as loadDetail } from '../../redux/modules/detail';
 import { Grid, Row, Col } from 'react-bootstrap';

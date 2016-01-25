@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import SchoolsListItem from '../SchoolsListItem/SchoolsListItem';
+import { SchoolsListItem } from '../';
 import { connect } from 'react-redux';
 
 @connect(

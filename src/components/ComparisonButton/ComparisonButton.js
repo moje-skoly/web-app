@@ -1,4 +1,3 @@
-
 import React, {PropTypes, Component} from 'react';
 import {add as addToComparison, remove as removeFromComparison} from '../../redux/modules/comparison';
 import {connect} from 'react-redux';

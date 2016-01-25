@@ -21,9 +21,21 @@ export default class App extends Component {
     store: PropTypes.object.isRequired
   };
 
+  menu(menuClass) {
+    return (
+      <ul className={menuClass}>
+        <li><a href="/manifest">manifest</a></li>
+        <li><a href="/o-projektu">o projektu</a></li>
+        <li><a href="/kontakt">kontakt</a></li>
+      </ul>
+    );
+  }
+
   render() {
     const styles = require('./App.less');
-    const logoImg = require('../../theme/images/logo.svg');
+    const logoImg = require('../../theme/images/logo.png');
+    const nadaceVodafoneImg = require('../../theme/images/vodafone_cs.png');
+    const motejlImg = require('../../theme/images/fom.png');
     return (
       <div>
         <DocumentMeta {...config.app}/>
@@ -33,8 +45,8 @@ export default class App extends Component {
               <Col xs={6}>
                 <h1><IndexLink to="/"><img src={logoImg} alt="Moje školy"/></IndexLink></h1>
               </Col>
-              <Col xs={6} className="text-right">
-                <a href="#" className={styles.helpLink}>návod k používání</a>
+              <Col sm={6} xs={12} className="text-right">
+                {this.menu('')}
               </Col>
             </Row>
           </Grid>
@@ -48,13 +60,16 @@ export default class App extends Component {
         <footer className={styles.bottom}>
           <Grid>
             <Row>
-              <Col xs={12}>
-                <ul className="pull-right">
-                  <li><a href="#">o nás</a></li>
-                  <li><a href="#">cookies</a></li>
-                  <li><a href="#">soukromí</a></li>
-                  <li><a href="#">kontakt</a></li>
-                </ul>
+              <Col md={4} mdOffset={4} xs={12} className={styles.sponsors}>
+                <a href="http://nadacevodafone.cz/">
+                  <img src={nadaceVodafoneImg} alt="Nadace Vodafone"/>
+                </a>
+                <a href="http://motejl.cz/">
+                  <img src={motejlImg} alt="Fond Otakara Motejla"/>
+                </a>
+              </Col>
+              <Col md={4} xs={12}>
+                {this.menu('pull-right')}
               </Col>
             </Row>
           </Grid>

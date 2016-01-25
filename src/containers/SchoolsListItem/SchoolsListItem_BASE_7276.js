@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 @connect(
@@ -23,35 +22,38 @@ export default class SchoolsListItem extends Component {
   };
 
   getAddressString = (school) => {
-    if (school.metadata.address === undefined) {
-      return ''; // the address is missing
-    }
-
+		if (school.metadata.address === undefined) {
+			return ''; // the address is missing
+		}
+		
     const { street, city, postalCode } = school.metadata.address;
     return `${street}, ${postalCode} ${city}`;
   };
 
   render() {
     const { school, isSelected } = this.props;
-    const { contact = null } = school.metadata;
     const websites = school.metadata.contact !== undefined ? school.metadata.contact.websites : [];
     const styles = require('./SchoolsListItem.less');
     return (
       <button className={isSelected ? styles.selectedItem : styles.unselectedItem} onClick={this.onClick}>
         <h2>{school.metadata.name}</h2>
-        <Row>
-          <Col xs={1}><i className={'fa fa-map-marker'} /></Col>
-          <Col xs={11}>{this.getAddressString(school)}</Col>
-        </Row>
-        {contact !== null && ('websites' in contact) && contact.websites.length >= 1
-          && (
-            <Row>
-              <Col xs={1}><i className={'fa fa-link'} /></Col>
-              <Col xs={11}>
-                {websites.map(web => <a href={(!web.startsWith('http') ? 'http://' : '') + web} key={web}>{web}</a>)}
-              </Col>
-            </Row>
-          )}
+        <table className={styles.table}>
+          <tbody>
+            <tr>
+              <th><i className={'fa fa-map-marker'} /></th>
+              <td>{this.getAddressString(school)}</td>
+            </tr>
+            {websites.length >= 1
+              && (
+                <tr>
+                  <th><i className={'fa fa-link'} /></th>
+                  <td>
+                    {websites.map(web => <a href={web} key={web}>{web}</a>)}
+                  </td>
+                </tr>
+              )}
+          </tbody>
+        </table>
       </button>
     );
   }

@@ -1,7 +1,7 @@
 // require('babel-polyfill');
 
-const title = 'Moje Školy';
-const description = 'České školy.';
+const title = 'Moje školy';
+const description = 'Moje školy je otevřená databáze mateřských, základních a středních škol na území České republiky.';
 
 module.exports = {
   isProduction: (process.env.NODE_ENV || 'production') === 'production',
@@ -16,14 +16,14 @@ module.exports = {
       charSet: 'utf-8',
       property: {
         'og:site_name': title,
-        'og:image': 'https://react-redux.herokuapp.com/logo.jpg',
+        'og:image': 'theme/images/favicon.png',
         'og:locale': 'cs_CZ',
         'og:title': title,
         'og:description': description,
         'twitter:card': 'summary',
         'twitter:title': title,
         'twitter:description': description,
-        'twitter:image': 'https://react-redux.herokuapp.com/logo.jpg',
+        'twitter:image': 'theme/images/favicon.png',
         'twitter:image:width': '200',
         'twitter:image:height': '200'
       }

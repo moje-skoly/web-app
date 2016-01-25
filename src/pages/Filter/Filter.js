@@ -3,9 +3,9 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { select as selectPreview, unselect as unselectPreview } from '../../redux/modules/preview';
 
-import SchoolFilter from '../../components/SchoolFilter/SchoolFilter';
+import SchoolFilter from '../../containers/SchoolFilter/SchoolFilter';
 import SchoolsList from '../../containers/SchoolsList/SchoolsList';
-import SchoolsMap from '../../containers/SchoolsMap/SchoolsMap';
+import SchoolsMap from '../../components/SchoolsMap/SchoolsMap';
 import styles from './Filter.less';
 
 @connect(
@@ -64,7 +64,7 @@ export default class Filter extends Component {
             </Col>
             <Col sm={6}>
               <div className={styles.map}>
-                <SchoolsMap schools={schools} select={this.selectSchool} center={center} />
+                <SchoolsMap schools={schools} select={this.selectSchool} center={center} centerTitle={address} />
               </div>
               {children}
             </Col>

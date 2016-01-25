@@ -1,4 +1,26 @@
+
 @import (less) '../../theme/less/style.less';
+
+.menu {
+  ul {
+    li {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      a {
+        color: @black;
+      }
+
+      &:not(:first-child):before {
+        content: "|";
+        margin-right: 10px;
+      }
+    }
+  }
+}
 
 .top {
   background: @white;
@@ -26,11 +48,14 @@
     height: 60px;
   }
 
-  .helpLink {
-    line-height: 80px;
-    text-decoration: none;
-    color: @black;
+  ul {
+    li {
+      line-height: 80px;
+      text-decoration: none;
+      color: @black;
+    }
   }
+  .menu()
 }
 
 #content {
@@ -42,22 +67,17 @@
 .bottom {
   padding: 20px 0 40px;
 
-  ul {
-    li {
-      display: inline-block;
+  .menu()
+}
 
-      &:not(:last-child) {
-        margin-right: 10px;
-      }
-
-      a {
-        color: @black;
-      }
-
-      &:not(:first-child):before {
-        content: "|";
-        margin-right: 10px;
-      }
+.sponsors {
+  text-align: center;
+  img {
+    max-height: 60px;
+  }
+  a:first-child {
+    img {
+      margin-right: 40px;
     }
   }
 }

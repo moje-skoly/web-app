@@ -2,12 +2,15 @@ import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import {
     App,
+    About,
     Home,
+    How,
     Detail,
     Comparison,
+    Contact,
     Filter,
     NotFound,
-    SchoolPreview
+    SchoolPreview,
   } from './pages';
 
 export default () => {
@@ -26,8 +29,13 @@ export default () => {
       {/* Detail of a school */}
       <Route path="detail/:schoolId" component={Detail} />
 
-      {/* Detail of a school */}
+      {/* Comparison of multiple schools */}
       <Route path="comparison/:schoolIds" component={Comparison} />
+
+      {/* Static pages */}
+      <Route path="o-projektu" component={About} />
+      <Route path="manifest" component={How} />
+      <Route path="kontakt" component={Contact} />
 
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />
