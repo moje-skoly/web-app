@@ -26,7 +26,7 @@ const SchoolsMap = ({
 
   // default position is the center of Prague and a bit unzoomed
   const mapCenter = center !== null ? center : { lat: 50.0803197, lon: 14.4155353 };
-  const zoom = schools.length > 0 ? 16 : 10;
+  const zoom = schools.length > 0 ? 16 : 12;
 
   return (
     <Map
