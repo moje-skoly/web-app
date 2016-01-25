@@ -48,7 +48,7 @@ export default class SchoolsListItem extends Component {
             <Row>
               <Col xs={1}><i className={'fa fa-link'} /></Col>
               <Col xs={11}>
-                {websites.map(web => <a href={(!web.startsWith('http') ? 'http://' : '') + web} key={web}>{web}</a>)}
+                {websites.map(web => <a href={(!web.startsWith('http') ? 'http://' : '') + web} key={web} target={'_blank'}>{web}</a>)}
               </Col>
             </Row>
           )}

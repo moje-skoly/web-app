@@ -59,14 +59,15 @@ export default class SchoolsMap extends Component {
           attribution={'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}
           />
         {filteredSchools.map(school => (
-          <Marker
+          !!school.metadata.address.location &&
+          (<Marker
             position={school.metadata.address.location}
             key={school._id}
             onClick={onClick(school)}>
             <Popup>
               <strong>{school.metadata.name}</strong>
             </Popup>
-          </Marker>
+          </Marker>)
         ))}
         {!!centerTitle && !!mapCenter && (
           <Marker position={mapCenter} key={-1} opacity={0.4}>
