@@ -28,7 +28,7 @@ const SchoolDetail = ({
       <div className={styles.body}>
         <MetaData data={metadata} />
         <div className={styles.map}>
-          <SchoolsMap schools={[ school ]} center={school.metadata.address.location} />
+          <SchoolsMap schools={[ school ]} center={school.metadata.address.location} allowZoom={false} />
         </div>
         {units.map(unit => <UnitDetail schoolMetadata={metadata} unit={unit} key={unit.IZO} />)}
       </div>

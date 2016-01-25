@@ -14,7 +14,8 @@ export default class SchoolsMap extends Component {
     schools: PropTypes.array.isRequired,
     center: PropTypes.object,
     centerTitle: PropTypes.string,
-    select: PropTypes.func
+    select: PropTypes.func,
+    allowZoom: PropTypes.bool
   }
 
   render() {
@@ -22,7 +23,8 @@ export default class SchoolsMap extends Component {
       schools,
       center = null,
       centerTitle = 'Vyhledaná adresa',
-      select
+      select,
+      allowZoom = true
     } = this.props;
 
     // leaflet does not support server-side rendering
@@ -49,6 +51,8 @@ export default class SchoolsMap extends Component {
         className={styles.map}
         center={mapCenter}
         zoom={zoom}
+        maxZoom={allowZoom ? 16 : zoom}
+        minZoom={allowZoom ? 5 : zoom}
         >
         <TileLayer
           url={'http://{s}.tile.osm.org/{z}/{x}/{y}.png'}
