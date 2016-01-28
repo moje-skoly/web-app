@@ -7,7 +7,7 @@ const Contact = () => {
     <Grid className={styles.about}>
       <Row>
         <h1><strong>Kontakt</strong></h1>
-        <Col xs={6} xsOffset={3}>
+        <Col xs={3} xsOffset={3}>
           <p>
             Marek Lisý<br/>
             <i>Koordinátor projektu</i><br/>

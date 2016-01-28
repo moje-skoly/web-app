@@ -19,7 +19,7 @@ const About = () => {
             </p>
             <h3>Odkud pochází naše data?</h3>
             <p>
-              Data poskytlo Ministerstvo školství, mládeže a tělovýchovy z <a href="http://rejskol.msmt.cz/" target="_blank">oficiálního rejstříku</a>. Ta nejzajímavější data poskytla Česká školní inspekce. Jde o data sbíraná formou dotazníků od jednotlivých škol, v původní podobě je můžete najít v <a href="">katalogu ČŠI</a>. V budoucnu uvažujeme o přidání dalších datových zdrojů, například zřizovatele škol, samotné školy či v omezené míře i veřejnost.
+              Data poskytlo Ministerstvo školství, mládeže a tělovýchovy z <a href="http://rejskol.msmt.cz/" target="_blank">oficiálního rejstříku</a>. Ta nejzajímavější data poskytla Česká školní inspekce. Jde o data sbíraná formou dotazníků od jednotlivých škol, v původní podobě je můžete najít na <a href="https://portal.csicr.cz/">Portálu ČŠI</a>. V budoucnu uvažujeme o přidání dalších datových zdrojů, například zřizovatele škol, samotné školy či v omezené míře i veřejnost.
             </p>
           </div>
         </Col>
