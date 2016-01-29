@@ -15,10 +15,10 @@ export default class MetaData extends Component {
   renderAddress = (address) => (
     <div className={styles.address}>
       <Row>
-        <Col xs={1} className={styles.icon}>
+        <Col xs={2} className={styles.icon}>
           <i className={'fa fa-map-marker'} />
         </Col>
-        <Col xs={11}>
+        <Col xs={10}>
           <p>
             {address.street}<br />
             {address.city}<br />
@@ -39,30 +39,30 @@ export default class MetaData extends Component {
         {websites && websites.length >= 1
           && (
             <Row>
-              <Col xs={1} className={styles.icon}>
+              <Col xs={2} className={styles.icon}>
                 <i className={'fa fa-link'} />
               </Col>
-              <Col xs={11}>
-                {websites.map(web => <a href={(!web.startsWith('http') ? 'http://' : '') + web} key={web}>{web}</a>)}
+              <Col xs={10}>
+                {websites.map(web => <a href={(!web.startsWith('http') ? 'http://' : '') + web} key={web} target={'_blank'}>{web}</a>)}
               </Col>
             </Row>
           )}
         {phoneNumbers && (
           <Row>
-            <Col xs={1} className={styles.icon}>
+            <Col xs={2} className={styles.icon}>
               <i className={'fa fa-phone'} />
             </Col>
-            <Col xs={11}>
+            <Col xs={10}>
               <p>{phoneNumbers.join(', ')}</p>
             </Col>
           </Row>
         )}
         {emails && (
           <Row>
-            <Col xs={1} className={styles.icon}>
+            <Col xs={2} className={styles.icon}>
               <i className={'fa fa-envelope-o'} />
             </Col>
-            <Col xs={11}>
+            <Col xs={10}>
               <p>{emails.join(', ')}</p>
             </Col>
           </Row>

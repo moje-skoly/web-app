@@ -26,5 +26,9 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
+<<<<<<< HEAD
 # Webpack assets
 webpack-assets.json
+=======
+webpack-assets.json
+>>>>>>> a2c289f46064d8533f3508e41c8a813e960d92e9

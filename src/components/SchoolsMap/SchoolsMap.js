@@ -13,14 +13,18 @@ export default class SchoolsMap extends Component {
   static propTypes = {
     schools: PropTypes.array.isRequired,
     center: PropTypes.object,
-    select: PropTypes.func
+    centerTitle: PropTypes.string,
+    select: PropTypes.func,
+    allowZoom: PropTypes.bool
   }
 
   render() {
     const {
       schools,
       center = null,
-      select
+      centerTitle = 'Vyhledaná adresa',
+      select,
+      allowZoom = true
     } = this.props;
 
     // leaflet does not support server-side rendering
@@ -47,21 +51,31 @@ export default class SchoolsMap extends Component {
         className={styles.map}
         center={mapCenter}
         zoom={zoom}
+        maxZoom={allowZoom ? 16 : zoom}
+        minZoom={allowZoom ? 5 : zoom}
         >
         <TileLayer
           url={'http://{s}.tile.osm.org/{z}/{x}/{y}.png'}
           attribution={'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}
           />
         {filteredSchools.map(school => (
-          <Marker
+          !!school.metadata.address.location &&
+          (<Marker
             position={school.metadata.address.location}
             key={school._id}
             onClick={onClick(school)}>
             <Popup>
               <strong>{school.metadata.name}</strong>
             </Popup>
-          </Marker>
+          </Marker>)
         ))}
+        {!!centerTitle && !!mapCenter && (
+          <Marker position={mapCenter} key={-1} opacity={0.4}>
+              <Popup>
+                <strong>{centerTitle}</strong>
+              </Popup>
+          </Marker>
+        )}
       </Map>
     );
   }

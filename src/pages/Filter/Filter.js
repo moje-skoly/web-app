@@ -64,7 +64,7 @@ export default class Filter extends Component {
             </Col>
             <Col sm={6}>
               <div className={styles.map}>
-                <SchoolsMap schools={schools} select={this.selectSchool} center={center} />
+                <SchoolsMap schools={schools} select={this.selectSchool} center={center} centerTitle={address} />
               </div>
               {children}
             </Col>
