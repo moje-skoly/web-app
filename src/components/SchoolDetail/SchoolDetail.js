@@ -3,8 +3,7 @@ import MetaData from '../../containers/MetaData/MetaData';
 import UnitDetail from '../UnitDetail/UnitDetail';
 import ComparisonButton from '../ComparisonButton/ComparisonButton';
 import styles from './SchoolDetail.less';
-import SchoolsMap, { getPosition } from '../SchoolsMap/SchoolsMap';
-console.log(getPosition);
+import SchoolsMap from '../SchoolsMap/SchoolsMap';
 
 const SchoolDetail = ({
   school

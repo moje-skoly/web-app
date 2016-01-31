@@ -1,27 +1,83 @@
 @import (less) '../../theme/less/colors.less';
 
+.title {
+  text-align: center;
+  border-bottom: 1px solid #000;
+  width: 300px;
+  margin: 0 auto;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
 .comparisonPage {
-  padding: 50px 0;
+  padding: 20px 50px;
   background: @grayBg;
+  overflow: hidden;
+  width: 100%;
+}
+
+.comparisonTable {
+  margin: 20px auto;
+  border-spacing: 20px 0;
+  border-collapse: separate;
+
+  td {
+    background: #fff;
+  }
 }
 
 .comparisonRow {
-  overflow-x: scroll;
-  overflow-y: none;
   text-align: center;
   white-space: nowrap;
-  padding: 20px;
+  position: relative;
+  z-index: 1;
+  transition: left 1s ease;
 }
 
-.detail {
-  display: inline-block;
+.comparisonSegment {
+  min-width: 400px;
+  max-width: 400px;
   vertical-align: top;
-  white-space: normal;
-  width: 400px;
-  text-align: left;
-  padding: 20px;
+}
 
-  &:nth-child(2n) {
-    background: @grayBg;
+.comparisonBlock {
+  background-color: #fff;
+  padding: 20px 10px;
+  border-top: 1px solid @grayBg;
+  overflow: hidden;
+  
+  * {
+    white-space: pre-line;
   }
+}
+
+.moveLeft,
+.moveRight {
+  border: none;
+  width: 13px;
+  height: 23px;
+  padding: 10px;
+  transition: all 0.2s cubic-bezier(0.41, 0.96, 0.58, 1.09);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.moveLeft {
+  float: left;
+  background-image: url('./pages/Comparison/arrow-left.png');
+}
+
+.moveRight {
+  float: right;
+  background-image: url('./pages/Comparison/arrow-right.png');
 }
