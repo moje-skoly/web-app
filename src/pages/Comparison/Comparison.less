@@ -21,15 +21,17 @@
   margin: 20px auto;
   border-spacing: 20px 0;
   border-collapse: separate;
+  table-layout: fixed;
 
   td {
     background: #fff;
+    vertical-align: top;
   }
 }
 
 .comparisonRow {
   text-align: center;
-  white-space: nowrap;
+  white-space: pre-line;
   position: relative;
   z-index: 1;
   transition: left 1s ease;
@@ -46,10 +48,13 @@
   padding: 20px 10px;
   border-top: 1px solid @grayBg;
   overflow: hidden;
-  
-  * {
-    white-space: pre-line;
-  }
+  width: 400px;
+}
+
+.missingInfo {
+  display: block;
+  padding-top: 50px;
+  color: #ccc;
 }
 
 .moveLeft,
@@ -80,4 +85,36 @@
 .moveRight {
   float: right;
   background-image: url('./pages/Comparison/arrow-right.png');
+}
+
+h3.unitTitle {
+  text-transform: uppercase;
+  text-align: center;
+  color: @pink;
+  font-size: 20px;
+}
+
+h4.sectionTitle {
+  font-size: 18px;
+  text-align: center;
+}
+
+.question,
+.answer {
+  vertical-align: top;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.question {
+  text-align: right;
+  width: 200px;
+  padding-left: 10px;
+}
+
+.answer {
+  font-weight: bold;
+  text-align: left;
+  width: 200px;
+  padding-right: 10px;
 }

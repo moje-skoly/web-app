@@ -1,15 +1,26 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
-import SchoolDetail from '../../components/SchoolDetail/SchoolDetail';
 import { load as loadComparison } from '../../redux/modules/comparison';
 import MetaData from '../../containers/MetaData/MetaData';
-import UnitDetail from '../../components/UnitDetail/UnitDetail';
 import SchoolsMap from '../../components/SchoolsMap/SchoolsMap';
-import ComparisonButton from '../../components/ComparisonButton/ComparisonButton';
+// import ComparisonButton from '../../components/ComparisonButton/ComparisonButton';
 import styles from './Comparison.less';
 
 const scrollStep = 400;
+
+const getUnitType = (type) => {
+  switch (type) {
+  case 'materska_skola':
+    return 'Mateřská škola';
+  case 'zakladni_skola':
+    return 'Základní škola';
+  case 'stredni_skola':
+    return 'Střední škola';
+  default:
+    return type;
+  }
+};
 
 @connect(
   (state, props) => ({
@@ -111,52 +122,100 @@ export default class Comparison extends Component {
         <tr>
         {schools.map(school => (
           <td key={school.id} className={styles.comparisonSegment}>
-            <div className={styles.comparisonBlock}>
+            {/* <div className={styles.comparisonBlock}>
               <span className={'pull-right'}>
                 <ComparisonButton school={school} />
               </span>
-            </div>
+            </div> */}
             <div className={styles.comparisonBlock}>
-              <MetaData data={school.metadata} />
+              <MetaData data={school.metadata} isTitle />
             </div>
-            {school.metadata.address.location && <SchoolsMap schools={[school]} center={school.metadata.address.location} allowZoom={false} centerTitle={school.metadata.name} />}
           </td>
         ))}
         </tr>
+        <tr>
+          {schools.map(school => (
+            <td>
+              {school.metadata.address.location && <SchoolsMap schools={[school]} center={school.metadata.address.location} allowZoom={false} centerTitle={school.metadata.name} />}
+            </td>
+          ))}
+        </tr>
 
         {/* Unit types */}
-        {unitTypes.map(type => (
-          <tr key={type}>
-          {schools.map(school => {
-            const unitOfType = school.units.find(unit => unit.unitType === type);
-            if (!unitOfType) {
-              return (
-                <td className={styles.comparisonSegment}>
-                  {/* this field will be empty */}
-                  <div className={styles.comparisonBlock} /> {/* the white bg */}
-                </td>
-              );
-            }
-
-            return (
-              <td className={styles.comparisonSegment}>
-                <div className={styles.comparisonBlock}>
-                  <UnitDetail schoolMetadata={school.metadata} unit={unitOfType} />
-                </div>
-              </td>
-            );
-          })}
-          </tr>
-        ))}
+        {unitTypes.map(type => this.renderUnit(type, schools))}
         </tbody>
       </table>
     );
   }
 
-  renderSchool(school) {
+  renderUnit(type, schools) {
+    const units = schools.map(school => school.units.find(unit => unit.unitType === type));
     return (
-      <div className={styles.detail} key={school._id}>
-        <SchoolDetail school={school} />
+      <div key={type}>
+        <tr>
+          {units.map((unit, unitId) => (
+            <td key={unitId}>
+              <h3 className={styles.unitTitle}>{getUnitType(type)}</h3>
+            </td>
+          ))}
+        </tr>
+        <tr>
+          {units.map((unit, unitId) => (
+            <td key={unitId}>
+              {(unit && unit.metadata)
+                ? <MetaData data={unit.metadata} />
+                : getUnitType(type) + ' na této škole není.'}
+            </td>
+          ))}
+        </tr>
+        {this.renderUnitSections(units)}
+      </div>
+    );
+  }
+
+  renderUnitSections(units) {
+    const sections = units.map(unit => !!unit ? unit.sections : [])
+                          .reduce((acc, unit) => !unit ? acc : [...acc, ...unit.reduce((unitAcc, section) => [...unitAcc, section.title], [])], [])
+                          .reduce((acc, item) => acc.indexOf(item) < 0 ? [...acc, item] : acc, []);
+
+    return (
+      <div>
+        {sections.map((section, sectionId) => (
+          <div key={sectionId}>
+            <tr>
+              {units.map((unit, unitId) => (
+                <td key={unitId}>
+                  <h4 className={styles.sectionTitle}>{section}</h4>
+                </td>
+              ))}
+            </tr>
+            {this.renderUnitSection(units.map(unit => (!unit || !unit.sections) ? [] : unit.sections.find(sec => sec.title === section)))}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  renderUnitSection(sections) {
+    const questions = sections.map(section => (!section || !section.information) ? [] : section.information)
+                              .reduce((sectionsAcc, information) => [...sectionsAcc, ...information.reduce((informationAcc, { key }) => [...informationAcc, key], [])], [])
+                              .reduce((acc, item) => acc.indexOf(item) < 0 ? [...acc, item] : acc, []);
+
+    return (
+      <div>
+        {questions.map((question, questionId) => (
+          <tr key={'question-' + questionId}>
+            {sections.map((section, sectionId) => {
+              const answer = (!section || !section.information) ? null : section.information.find(({ key }) => key === question);
+              return (
+                <td>
+                  <p className={styles.question}>{question}{':'}</p>
+                  <p className={styles.answer}>{!answer ? '-' : answer.value}</p>
+                </td>
+              );
+            })}
+          </tr>
+        ))}
       </div>
     );
   }
