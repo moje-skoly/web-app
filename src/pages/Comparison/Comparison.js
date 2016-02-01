@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import { load as loadComparison } from '../../redux/modules/comparison';
 import MetaData from '../../containers/MetaData/MetaData';
 import SchoolsMap from '../../components/SchoolsMap/SchoolsMap';
-import ComparisonButton from '../../components/ComparisonButton/ComparisonButton';
+// import ComparisonButton from '../../components/ComparisonButton/ComparisonButton';
 import styles from './Comparison.less';
 
 const scrollStep = 400;
@@ -122,11 +122,11 @@ export default class Comparison extends Component {
         <tr>
         {schools.map(school => (
           <td key={school.id} className={styles.comparisonSegment}>
-            <div className={styles.comparisonBlock}>
+            {/* <div className={styles.comparisonBlock}>
               <span className={'pull-right'}>
                 <ComparisonButton school={school} />
               </span>
-            </div>
+            </div> */}
             <div className={styles.comparisonBlock}>
               <MetaData data={school.metadata} isTitle />
             </div>

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 
 @connect(
-  status => ({
-    schoolsCount: status.comparison.schools.length,
-    schoolIds: status.comparison.schools.map(school => school._id).join(',')
+  state => ({
+    schoolsCount: state.comparison.schools.length,
+    schoolIds: state.comparison.schools.map(school => school._id).join(',')
   }),
   dispatch => ({
     compare: (ids) => dispatch(pushState(null, `/comparison/${ids}`))
