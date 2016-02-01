@@ -5,7 +5,8 @@ import { Row, Col } from 'react-bootstrap';
 export default class MetaData extends Component {
   static propTypes = {
     comparison: PropTypes.object,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    isTitle: PropTypes.bool
   }
 
   match = (first, second) => {
@@ -107,13 +108,13 @@ export default class MetaData extends Component {
   };
 
   render() {
-    const { comparison, data } = this.props;
+    const { comparison, data, isTitle } = this.props;
     const { name, address, contact, headmaster, founder } = data;
 
     return (
       <div className={styles.metaInfo}>
         {(!comparison || comparison.name !== name)
-          && <h2 className={styles.title}>{name}</h2>}
+          && <h2 className={isTitle === true ? styles.title : styles.heading}>{name}</h2>}
 
         {address
           && (!comparison || this.match(comparison.address, address) === false)

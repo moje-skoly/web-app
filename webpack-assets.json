@@ -1,6 +1,6 @@
 {
   "javascript": {
-    "main": "http://localhost:3001/dist/main-121b1128d45b948df95b.js"
+    "main": "http://localhost:3001/dist/main-878ec929553492f5b1c5.js"
   },
   "styles": {},
   "assets": {
@@ -57,10 +57,11 @@
       "footer": "footer___z5VGy",
       "map": "map___3mzhX",
       "metaInfo": "metaInfo___39bke",
+      "heading": "heading___B9yGz",
       "title": "title___2RjaW",
       "icon": "icon___pCe4n",
       "other": "other___1IIEA",
-      "_style": ".detail___1y1h5 {\n  background: #fff;\n  padding: 0;\n}\n.header___3Y2BX {\n  padding: 10px;\n  overflow: hidden;\n  border-bottom: 1px solid #f3f3f3;\n}\n.footer___z5VGy {\n  padding: 10px;\n  overflow: hidden;\n  border-top: 1px solid #f3f3f3;\n}\n.map___3mzhX {\n  margin: 20px 0 0;\n}\n.metaInfo___39bke {\n  text-align: left;\n  padding: 0 20px;\n}\n.title___2RjaW {\n  text-align: center;\n}\n.icon___pCe4n {\n  text-align: center;\n  font-size: 18px;\n}\n.other___1IIEA td {\n  padding: 2px 15px 2px 0;\n}\n.other___1IIEA td:last-child {\n  font-weight: bold;\n}\n"
+      "_style": ".detail___1y1h5 {\n  background: #fff;\n  padding: 0;\n}\n.header___3Y2BX {\n  padding: 10px;\n  overflow: hidden;\n  border-bottom: 1px solid #f3f3f3;\n}\n.footer___z5VGy {\n  padding: 10px;\n  overflow: hidden;\n  border-top: 1px solid #f3f3f3;\n}\n.map___3mzhX {\n  margin: 20px 0 0;\n}\n.metaInfo___39bke {\n  text-align: left;\n  padding: 0 20px;\n}\n.heading___B9yGz {\n  text-align: center;\n}\n.title___2RjaW {\n  text-align: center;\n  min-height: 120px;\n}\n.icon___pCe4n {\n  text-align: center;\n  font-size: 18px;\n}\n.other___1IIEA td {\n  padding: 2px 15px 2px 0;\n}\n.other___1IIEA td:last-child {\n  font-weight: bold;\n}\n"
     },
     "./src/components/SchoolsMap/SchoolsMap.less": {
       "map": "map___3iSwp",

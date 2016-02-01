@@ -128,7 +128,7 @@ export default class Comparison extends Component {
               </span>
             </div>
             <div className={styles.comparisonBlock}>
-              <MetaData data={school.metadata} />
+              <MetaData data={school.metadata} isTitle />
             </div>
           </td>
         ))}
