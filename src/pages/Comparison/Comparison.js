@@ -135,8 +135,11 @@ export default class Comparison extends Component {
         </tr>
         <tr>
           {schools.map(school => (
-            <td>
-              {school.metadata.address.location && <SchoolsMap schools={[school]} center={school.metadata.address.location} allowZoom={false} centerTitle={school.metadata.name} />}
+            <td className={styles.relative}>
+              <div className={styles.allowScroll}></div>
+              {school.metadata.address.location && (
+                <SchoolsMap schools={[school]} center={school.metadata.address.location} allowZoom={false} centerTitle={school.metadata.name} />
+                )}
             </td>
           ))}
         </tr>
@@ -161,10 +164,10 @@ export default class Comparison extends Component {
         </tr>
         <tr>
           {units.map((unit, unitId) => (
-            <td key={unitId}>
+            <td key={unitId} className={styles.unit}>
               {(unit && unit.metadata)
                 ? <MetaData data={unit.metadata} />
-                : getUnitType(type) + ' na této škole není.'}
+                : <div className={styles.missingUnit}>{getUnitType(type)} na této škole není.</div>}
             </td>
           ))}
         </tr>
@@ -208,7 +211,7 @@ export default class Comparison extends Component {
             {sections.map((section, sectionId) => {
               const answer = (!section || !section.information) ? null : section.information.find(({ key }) => key === question);
               return (
-                <td>
+                <td className={!answer ? styles.missing : null}>
                   <p className={styles.question}>{question}{':'}</p>
                   <p className={styles.answer}>{!answer ? '-' : answer.value}</p>
                 </td>

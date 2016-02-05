@@ -11,7 +11,7 @@
 }
 
 .comparisonPage {
-  padding: 20px 50px;
+  // padding: 20px 50px; // this was not working correctly; .container has fixed width so the padding applies only to the left side
   background: @grayBg;
   overflow: hidden;
   width: 100%;
@@ -27,6 +27,24 @@
     background: #fff;
     vertical-align: top;
   }
+}
+
+.relative {
+  position: relative;
+}
+
+.allowScroll {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 345px;
+  background: transparent;
+  z-index: 100;
+}
+
+.unit {
+  font-size: 11pt;
 }
 
 .comparisonRow {
@@ -55,6 +73,17 @@
   display: block;
   padding-top: 50px;
   color: #ccc;
+}
+
+.missing {
+  color: #ccc;
+  font-style: italic;
+}
+
+.missingUnit {
+  padding-top: 20px;
+  .missing;
+  .unit;
 }
 
 .moveLeft,
@@ -104,6 +133,7 @@ h4.sectionTitle {
   vertical-align: top;
   display: inline-block;
   padding: 0 5px;
+  .unit;
 }
 
 .question {
