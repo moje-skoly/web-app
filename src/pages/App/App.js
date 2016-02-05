@@ -42,10 +42,10 @@ export default class App extends Component {
         <header id="top" className={styles.top}>
           <Grid>
             <Row>
-              <Col xs={6}>
+              <Col xs={3}>
                 <h1><IndexLink to="/"><img src={logoImg} alt="Moje školy"/></IndexLink></h1>
               </Col>
-              <Col sm={6} xs={12} className="text-right">
+              <Col xs={9} className="text-right">
                 {this.menu('')}
               </Col>
             </Row>
