@@ -69,6 +69,13 @@ export default class SchoolFilter extends Component {
     changeUrl(address, schoolType);
   }
 
+  getResultCountable = (resultCount) => {
+    if (resultCount === 0 || resultCount > 4) {
+      return 'ků';
+    }
+    return resultCount > 1 ? 'ky' : 'ek';
+  };
+
   load = () => {
     const { load } = this.props;
     const { address, schoolType } = this.state;
@@ -90,7 +97,9 @@ export default class SchoolFilter extends Component {
     return (
       <div>
         <p className={'text-right'}>
-          <span className={styles.countTag}>{schoolsCount}</span>
+          <span className={styles.countTag}>
+            {schoolsCount} výsled{this.getResultCountable(schoolsCount)}
+          </span>
           <button className={styles.toggleSettings} onClick={this.toggleFilter}>
             {'podrobné filtrování'}
             <span className={styles.arrow}>
