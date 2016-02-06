@@ -36,7 +36,7 @@ export default class HomepageSarch extends Component {
     const { loc, type, canSearch} = this.state;
     if (canSearch) {
       dispatch(filter(loc, type));
-      dispatch(pushState(null, `/filter/${loc}/${type}`));
+      dispatch(pushState(null, `/filter/${encodeURIComponent(loc)}/${encodeURIComponent(type)}`));
     }
   };
 

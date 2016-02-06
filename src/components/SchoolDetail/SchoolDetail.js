@@ -17,6 +17,9 @@ const SchoolDetail = ({
   }
 
   const { metadata, units } = school;
+  const unitsOnMap = [school, ...school.units].filter(unit => !!unit.metadata.address.location)
+                      .reduce((acc, item) => !acc.find(unit => unit.metadata.address.location === item.metadata.address.location) ? [...acc, item] : acc, []); // only one pin at one location
+
   return (
     <div className={styles.detail}>
       <div className={styles.header}>
@@ -27,7 +30,7 @@ const SchoolDetail = ({
       <div className={styles.body}>
         <MetaData data={metadata} />
         <div className={styles.map}>
-          <SchoolsMap schools={[ school ]} center={school.metadata.address.location} allowZoom={false} />
+          <SchoolsMap schools={unitsOnMap} center={school.metadata.address.location} ceterTitle={school.metadata.name} allowZoom />
         </div>
         {units.map(unit => <UnitDetail schoolMetadata={metadata} unit={unit} key={unit.IZO} />)}
       </div>

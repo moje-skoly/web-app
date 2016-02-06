@@ -64,9 +64,10 @@ export default class SchoolsMap extends Component {
             position={school.metadata.address.location}
             key={school._id}
             onClick={onClick(school)}>
-            <Popup>
-              <strong>{school.metadata.name}</strong>
-            </Popup>
+            {!!school.metadata.name &&
+              (<Popup>
+                <strong>{school.metadata.name}</strong>
+            </Popup>)}
           </Marker>)
         ))}
         {!!centerTitle && !!mapCenter && (

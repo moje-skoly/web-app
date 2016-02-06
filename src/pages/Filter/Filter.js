@@ -6,12 +6,13 @@ import { select as selectPreview, unselect as unselectPreview } from '../../redu
 import SchoolFilter from '../../containers/SchoolFilter/SchoolFilter';
 import SchoolsList from '../../containers/SchoolsList/SchoolsList';
 import SchoolsMap from '../../components/SchoolsMap/SchoolsMap';
+import SuggestedAddresses from '../../containers/SuggestedAddresses/SuggestedAddresses';
 import styles from './Filter.less';
 
 @connect(
   (state, props) => ({
     schools: state.filter.schools,
-    radius: state.filter.radius,
+    addresses: state.filter.addresses || [],
     center: state.filter.center,
     previewedSchoolId: state.router.params.previewId,
   }),
@@ -23,10 +24,10 @@ import styles from './Filter.less';
 export default class Filter extends Component {
 
   static propTypes = {
-    radius: PropTypes.string,
     center: PropTypes.object,
     children: PropTypes.object,
     schools: PropTypes.array.isRequired,
+    addresses: PropTypes.array,
     previewedSchoolId: PropTypes.string,
 
     select: PropTypes.func.isRequired,
@@ -49,8 +50,17 @@ export default class Filter extends Component {
   };
 
   render() {
-    const { schools, children, radius, center, params } = this.props;
+    const { schools, children, center, params, addresses } = this.props;
     const { address, schoolType } = params;
+    const filteredAddresses = addresses.filter(addr => addr !== address);
+    const unitsOnMap = schools.map(school => {
+      const unitOfType = school.units.find(unit => unit.unitType === schoolType);
+      if (!!unitOfType && !!unitOfType.metadata.address.location) {
+        return unitOfType;
+      }
+
+      return school;
+    });
 
     return (
       <div className={styles.homepage}>
@@ -58,13 +68,14 @@ export default class Filter extends Component {
           <Row>
             <Col sm={6}>
               <h1 className={styles.underlinedTitle}>{'Školy v oblasti'}</h1>
-              <p className={styles.radiusParagraph}>{'v okruhu '}{radius}{' od zvolené adresy'}</p>
+              <p className={styles.radiusParagraph}>{address} {address.length > 0 && ' a okolí'}</p>
               <SchoolFilter address={address} schoolType={schoolType} />
+              <SuggestedAddresses addresses={filteredAddresses} type={schoolType} />
               <SchoolsList schools={schools} select={this.selectSchool} />
             </Col>
             <Col sm={6}>
               <div className={styles.map}>
-                <SchoolsMap schools={schools} select={this.selectSchool} center={center} centerTitle={address} />
+                <SchoolsMap schools={unitsOnMap} select={this.selectSchool} center={center} centerTitle={address} />
               </div>
               {children}
             </Col>

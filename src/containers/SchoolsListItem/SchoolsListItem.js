@@ -31,6 +31,14 @@ export default class SchoolsListItem extends Component {
     return `${street}, ${postalCode} ${city}`;
   };
 
+  getDistance = (distance) => {
+    if (distance >= 1) {
+      return `${distance.toFixed(1).toLocaleString().replace('.', ',')} km`;
+    }
+
+    return `${(distance * 1000).toFixed(0).toLocaleString().replace('.', ',')} m`;
+  };
+
   render() {
     const { school, isSelected } = this.props;
     const { contact = null } = school.metadata;
@@ -38,7 +46,14 @@ export default class SchoolsListItem extends Component {
     const styles = require('./SchoolsListItem.less');
     return (
       <button className={isSelected ? styles.selectedItem : styles.unselectedItem} onClick={this.onClick}>
-        <h2>{school.metadata.name}</h2>
+        <Row>
+          <Col xs={9}>
+            <h2>{school.metadata.name}</h2>
+          </Col>
+          <Col xs={3}>
+            <span className={styles.distance}>{this.getDistance(school.distance)}</span>
+          </Col>
+        </Row>
         <Row>
           <Col xs={1}><i className={'fa fa-map-marker'} /></Col>
           <Col xs={11}>{this.getAddressString(school)}</Col>

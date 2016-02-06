@@ -13,7 +13,7 @@ import styles from './SchoolFilter.less';
   }),
   dispatch => ({
     load: (address, schoolType) => dispatch(filter(address, schoolType)),
-    changeUrl: (address, schoolType) => dispatch(pushState(null, `/filter/${address}/${schoolType}`))
+    changeUrl: (address, schoolType) => dispatch(pushState(null, `/filter/${encodeURIComponent(address)}/${encodeURIComponent(schoolType)}`))
   })
 )
 export default class SchoolFilter extends Component {
@@ -45,6 +45,15 @@ export default class SchoolFilter extends Component {
       && loading === false) {
 
       this.load();
+    }
+  };
+
+  componentWillReceiveProps = (props) => {
+    if (props.address !== this.state.address || props.schoolType !== this.state.schoolType) {
+      this.setState({
+        address: props.address,
+        schoolType: props.schoolType
+      });
     }
   };
 
@@ -91,7 +100,7 @@ export default class SchoolFilter extends Component {
         </p>
 
         {showFilter && (
-          <div className={styles.advancedFiltering}>
+          <form className={styles.advancedFiltering}>
             <h3>Lokalita</h3>
             <p className={'form-group'}>
               <input value={address} onChange={this.changeAddress} className={'form-control'} />
@@ -111,7 +120,7 @@ export default class SchoolFilter extends Component {
                 {loading === true ? 'Probíhá vyhledávání...' : 'Změnit kritéria'}
               </button>
             </p>
-          </div>
+          </form>
         )}
       </div>
     );

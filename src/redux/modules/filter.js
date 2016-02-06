@@ -21,7 +21,8 @@ export default function filter(state = initialState, action = {}) {
       loaded: true,
       radius: action.result.radius,
       center: action.result.location,
-      schools: action.result.schools
+      schools: action.result.schools,
+      addresses: action.result.addresses
     };
   case LOAD_FAIL:
     return {
@@ -42,6 +43,6 @@ export function isLoaded(globalState) {
 export function load(address, schoolType) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`/v1/search/${address}/${schoolType}`)
+    promise: (client) => client.get(`/v1/search/${encodeURIComponent(address)}/${encodeURIComponent(schoolType)}`)
   };
 }
