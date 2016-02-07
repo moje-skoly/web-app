@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { load as loadComparison } from '../../redux/modules/comparison';
+import { load as loadComparison, remove as removeFromComparison } from '../../redux/modules/comparison';
 import MetaData from '../../containers/MetaData/MetaData';
 import SchoolsMap from '../../components/SchoolsMap/SchoolsMap';
-// import ComparisonButton from '../../components/ComparisonButton/ComparisonButton';
+import ComparisonButton from '../../components/ComparisonButton/ComparisonButton';
 import styles from './Comparison.less';
+import { pushState } from 'redux-router';
 
 const scrollStep = 400;
 
@@ -31,7 +32,12 @@ const getUnitType = (type) => {
     schoolIds: props.params.schoolIds.split(',')
   }),
   dispatch => ({
-    load: (ids) => dispatch(loadComparison(ids))
+    load: (ids) => dispatch(loadComparison(ids)),
+    compare: (schools) => {
+      const ids = schools.map(school => school._id).join(',');
+      dispatch(pushState(null, `/comparison/${ids}`));
+    },
+    remove: (school) => dispatch(removeFromComparison(school))
   })
 )
 export default class Comparison extends Component {
@@ -43,7 +49,8 @@ export default class Comparison extends Component {
     schools: PropTypes.array,
     schoolIds: PropTypes.array.isRequired,
     params: PropTypes.object,
-    load: PropTypes.func.isRequired
+    load: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired
   };
 
   state = {
@@ -53,9 +60,32 @@ export default class Comparison extends Component {
 
   componentDidMount = () => {
     const { error, loaded, loading, load, schoolIds } = this.props;
-    if (error === false && loaded === false && loading === false) { load(schoolIds); }
-    setTimeout(() => this.checkArrowsNecessity(), 1000);
+    if (error === false
+        && loaded === false
+        && loading === false) {
+      load(schoolIds); // load the comparison data again according to the URL params
+    }
+
+    setTimeout(() => this.checkArrowsNecessity(), 2000);
     window.addEventListener('resize', () => this.checkArrowsNecessity());
+  };
+
+  componentWillReceiveProps = (newProps) => {
+    // reflect URL changes
+    if (this.props.params.schoolIds !== newProps.params.schoolIds) {
+      const { loaded, load, schoolIds, schools } = newProps;
+      const loadedSchoolsIds = schools.map(school => school._id);
+
+      if (loaded === true && loadedSchoolsIds.length < schoolIds.length) {
+        load(schoolIds); // load the comparison data again according to the URL params
+      } else if (loaded === true && loadedSchoolsIds.length > schoolIds.length) {
+        // remove the schools, which are redundant! :-)
+        const { remove } = this.props;
+        schools.filter(school => schoolIds.indexOf(school._id) === -1).map(remove);
+      }
+
+      setTimeout(() => this.checkArrowsNecessity(), 1000);
+    }
   };
 
   componentWillUnmount = () => {
@@ -89,9 +119,14 @@ export default class Comparison extends Component {
     });
   }
 
+  removeSchool = (removedSchool) => {
+    const { schools, compare } = this.props;
+    compare(schools.filter(school => school._id !== removedSchool._id));
+  };
+
   renderLoading() {
     return (
-      <p>Načítám srovnání škol...</p>
+      <p className={styles.loading}>Načítám srovnání škol...</p>
     );
   }
 
@@ -120,13 +155,13 @@ export default class Comparison extends Component {
         <tbody>
         {/* Metadata */}
         <tr>
-        {schools.map(school => (
-          <td key={school.id} className={styles.comparisonSegment}>
-            {/* <div className={styles.comparisonBlock}>
+        {schools.map((school, index) => (
+          <td key={index} className={styles.comparisonSegment}>
+            <div className={styles.comparisonBlock}>
               <span className={'pull-right'}>
-                <ComparisonButton school={school} />
+                <ComparisonButton school={school} onClick={() => this.removeSchool(school)} />
               </span>
-            </div> */}
+            </div>
             <div className={styles.comparisonBlock}>
               <MetaData data={school.metadata} isTitle />
             </div>
@@ -134,8 +169,8 @@ export default class Comparison extends Component {
         ))}
         </tr>
         <tr>
-          {schools.map(school => (
-            <td className={styles.relative}>
+          {schools.map((school, index) => (
+            <td className={styles.relative} key={index}>
               <div className={styles.allowScroll}></div>
               {school.metadata.address.location && (
                 <SchoolsMap schools={[school]} center={school.metadata.address.location} allowZoom={false} centerTitle={school.metadata.name} />
@@ -153,27 +188,25 @@ export default class Comparison extends Component {
 
   renderUnit(type, schools) {
     const units = schools.map(school => school.units.find(unit => unit.unitType === type));
-    return (
-      <div key={type}>
-        <tr>
-          {units.map((unit, unitId) => (
-            <td key={unitId}>
-              <h3 className={styles.unitTitle}>{getUnitType(type)}</h3>
-            </td>
-          ))}
-        </tr>
-        <tr>
-          {units.map((unit, unitId) => (
-            <td key={unitId} className={styles.unit}>
-              {(unit && unit.metadata)
-                ? <MetaData data={unit.metadata} />
-                : <div className={styles.missingUnit}>{getUnitType(type)} na této škole není.</div>}
-            </td>
-          ))}
-        </tr>
-        {this.renderUnitSections(units)}
-      </div>
-    );
+    return [
+      <tr key={'type-' + type + '-title'}>
+        {units.map((unit, unitId) => (
+          <td key={unitId}>
+            <h3 className={styles.unitTitle}>{getUnitType(type)}</h3>
+          </td>
+        ))}
+      </tr>,
+      <tr key={'type-' + type + '-content'}>
+        {units.map((unit, unitId) => (
+          <td key={unitId} className={styles.unit}>
+            {(unit && unit.metadata)
+              ? <MetaData data={unit.metadata} />
+              : <div className={styles.missingUnit}>{getUnitType(type)} na této škole není.</div>}
+          </td>
+        ))}
+      </tr>,
+      this.renderUnitSections(units)
+    ];
   }
 
   renderUnitSections(units) {
@@ -181,22 +214,16 @@ export default class Comparison extends Component {
                           .reduce((acc, unit) => !unit ? acc : [...acc, ...unit.reduce((unitAcc, section) => [...unitAcc, section.title], [])], [])
                           .reduce((acc, item) => acc.indexOf(item) < 0 ? [...acc, item] : acc, []);
 
-    return (
-      <div>
-        {sections.map((section, sectionId) => (
-          <div key={sectionId}>
-            <tr>
-              {units.map((unit, unitId) => (
-                <td key={unitId}>
-                  <h4 className={styles.sectionTitle}>{section}</h4>
-                </td>
-              ))}
-            </tr>
-            {this.renderUnitSection(units.map(unit => (!unit || !unit.sections) ? [] : unit.sections.find(sec => sec.title === section)))}
-          </div>
+    return sections.map((section, sectionId) => [
+      <tr key={'section-' + sectionId}>
+        {units.map((unit, unitId) => (
+          <td key={unitId}>
+            <h4 className={styles.sectionTitle}>{section}</h4>
+          </td>
         ))}
-      </div>
-    );
+      </tr>,
+      this.renderUnitSection(units.map(unit => (!unit || !unit.sections) ? [] : unit.sections.find(sec => sec.title === section)))
+    ]).reduce((acc, item) => [...acc, item[0], item[1]], []);
   }
 
   renderUnitSection(sections) {
@@ -204,23 +231,19 @@ export default class Comparison extends Component {
                               .reduce((sectionsAcc, information) => [...sectionsAcc, ...information.reduce((informationAcc, { key }) => [...informationAcc, key], [])], [])
                               .reduce((acc, item) => acc.indexOf(item) < 0 ? [...acc, item] : acc, []);
 
-    return (
-      <div>
-        {questions.map((question, questionId) => (
-          <tr key={'question-' + questionId}>
-            {sections.map((section, sectionId) => {
-              const answer = (!section || !section.information) ? null : section.information.find(({ key }) => key === question);
-              return (
-                <td className={!answer ? styles.missing : null}>
-                  <p className={styles.question}>{question}{':'}</p>
-                  <p className={styles.answer}>{!answer ? '-' : answer.value}</p>
-                </td>
-              );
-            })}
-          </tr>
-        ))}
-      </div>
-    );
+    return questions.map((question, questionId) => (
+      <tr key={'question-' + questionId}>
+        {sections.map((section, sectionId) => {
+          const answer = (!section || !section.information) ? null : section.information.find(({ key }) => key === question);
+          return (
+            <td className={!answer ? styles.missing : null}>
+              <p className={styles.question}>{question}{':'}</p>
+              <p className={styles.answer}>{!answer ? '-' : answer.value}</p>
+            </td>
+          );
+        })}
+      </tr>
+    ));
   }
 
   renderComparison() {

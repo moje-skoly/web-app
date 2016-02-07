@@ -56,7 +56,8 @@ export default class Filter extends Component {
     const unitsOnMap = schools.map(school => {
       const unitOfType = school.units.find(unit => unit.unitType === schoolType);
       if (!!unitOfType && !!unitOfType.metadata.address.location) {
-        return unitOfType;
+        // change the location of the school to the location of the unit
+        school.metadata.address.location = unitOfType.metadata.address.location;
       }
 
       return school;
@@ -70,7 +71,7 @@ export default class Filter extends Component {
               <h1 className={styles.underlinedTitle}>{'Školy v oblasti'}</h1>
               <p className={styles.radiusParagraph}>{address} {address.length > 0 && ' a okolí'}</p>
               <SchoolFilter address={address} schoolType={schoolType} />
-              <SuggestedAddresses addresses={filteredAddresses} type={schoolType} />
+              <SuggestedAddresses currentAddress={address} addresses={filteredAddresses} type={schoolType} />
               <SchoolsList schools={schools} select={this.selectSchool} />
             </Col>
             <Col sm={6}>

@@ -36,11 +36,10 @@ export default function comparison(state = initialState, action = {}) {
       schools: state.schools
     };
   case LOAD_SUCCESS:
-    const newSchools = action.result.schools.filter(school => state.schools.find(old => old._id === school._id) === undefined); // add only new items
     return {
       error: false,
       loaded: true,
-      schools: [...state.schools, ...newSchools]
+      schools: action.result.schools
     };
   case LOAD_FAIL:
     return {
