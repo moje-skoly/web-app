@@ -12,6 +12,7 @@ const Home = () => (
     </div>
     <HomepageSearch />
     <HowItWorks />
+    <HomepageSearch />
   </div>
 );
 

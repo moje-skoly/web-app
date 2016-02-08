@@ -39,6 +39,10 @@ export default class Filter extends Component {
     }).isRequired
   };
 
+  componentDidMount = () => {
+
+  };
+
   selectSchool = (school) => {
     const { previewedSchoolId, select, unselect, params } = this.props;
     const { address, schoolType } = params;

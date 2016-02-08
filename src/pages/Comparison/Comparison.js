@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Alert } from 'react-bootstrap';
 import { load as loadComparison, remove as removeFromComparison } from '../../redux/modules/comparison';
 import MetaData from '../../containers/MetaData/MetaData';
 import SchoolsMap from '../../components/SchoolsMap/SchoolsMap';
@@ -67,7 +67,7 @@ export default class Comparison extends Component {
     }
 
     setTimeout(() => this.checkArrowsNecessity(), 2000);
-    window.addEventListener('resize', () => this.checkArrowsNecessity());
+    window.addEventListener('resize', this.checkArrowsNecessity);
   };
 
   componentWillReceiveProps = (newProps) => {
@@ -84,18 +84,18 @@ export default class Comparison extends Component {
         schools.filter(school => schoolIds.indexOf(school._id) === -1).map(remove);
       }
 
-      setTimeout(() => this.checkArrowsNecessity(), 1000);
+      setTimeout(this.checkArrowsNecessity, 1000);
     }
   };
 
   componentWillUnmount = () => {
-    window.removeEventListener('resize', () => this.checkArrowsNecessity());
+    window.removeEventListener('resize', this.checkArrowsNecessity);
   };
 
   checkArrowsNecessity() {
-    if (!!this.refs.table &&
-        !!this.refs.page &&
-          this.refs.table.getBoundingClientRect().width <= this.refs.page.getBoundingClientRect().width) {
+    if (!!this.table &&
+        !!this.page &&
+          this.table.getBoundingClientRect().width <= this.page.getBoundingClientRect().width) {
       this.setState({
         showArrows: false,
         focusedSchool: 0
@@ -105,6 +105,28 @@ export default class Comparison extends Component {
         showArrows: true
       });
     }
+  }
+
+  hasInfo(school) {
+    const { units } = school;
+    let has = false;
+    units.map((unit) => {
+      if (!!unit.sections) {
+        has = true;
+      }
+    });
+    return has;
+  }
+
+  missingInfoWarning(school) {
+    if (!this.hasInfo(school)) {
+      return (
+        <Alert bsStyle="warning" className={styles.comparisonAlert}>
+          Omlouváme se, tato škola nemá vyplněný podrobný profil. Data přebíráme z <a href="https://portal.csicr.cz/" target="_blank">Portálu České Školní Inspekce</a>.
+        </Alert>
+      );
+    }
+    return '';
   }
 
   prevSchool() {
@@ -151,7 +173,7 @@ export default class Comparison extends Component {
       .reduce((acc, item) => acc.indexOf(item) < 0 ? [...acc, item] : acc, []);
 
     return (
-      <table className={styles.comparisonTable} ref={'table'}>
+      <table className={styles.comparisonTable} ref={(ref) => this.table = ref}>
         <tbody>
         {/* Metadata */}
         <tr>
@@ -175,6 +197,14 @@ export default class Comparison extends Component {
               {school.metadata.address.location && (
                 <SchoolsMap schools={[school]} center={school.metadata.address.location} allowZoom={false} centerTitle={school.metadata.name} />
                 )}
+            </td>
+          ))}
+        </tr>
+
+        <tr>
+          {schools.map((school) => (
+            <td>
+              {this.missingInfoWarning(school)}
             </td>
           ))}
         </tr>
@@ -251,7 +281,7 @@ export default class Comparison extends Component {
     const { focusedSchool, showArrows } = this.state;
 
     return (
-      <div className={styles.comparisonPage} ref={'page'}>
+      <div className={styles.comparisonPage} ref={(ref) => this.page = ref}>
         <Grid>
           <Row>
             <Col xs={12}>

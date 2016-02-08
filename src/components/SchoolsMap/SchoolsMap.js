@@ -70,8 +70,8 @@ export default class SchoolsMap extends Component {
         className={styles.map}
         center={this.latLng(mapCenter)}
         zoom={zoom}
-        maxZoom={allowZoom ? 16 : zoom}
-        minZoom={allowZoom ? 5 : zoom}
+        maxZoom={allowZoom || true ? 16 : zoom}
+        minZoom={allowZoom || true ? 5 : zoom}
         >
         <TileLayer
           url={'http://{s}.tile.osm.org/{z}/{x}/{y}.png'}

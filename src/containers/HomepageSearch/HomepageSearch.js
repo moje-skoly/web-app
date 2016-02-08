@@ -49,8 +49,8 @@ export default class HomepageSarch extends Component {
           <form className="form form-horizontal">
             <Row>
               <Col md={8} xs={12}>
-                <label htmlFor="loc">Lokalita školy</label>
-                <input id="loc" type="text" value={loc} onChange={this.changeLoc} placeholder="zadejte adresu" className="form-control" />
+                <label htmlFor="loc">Vaše adresa</label>
+                <input id="loc" type="text" value={loc} onChange={this.changeLoc} placeholder="zadejte adresu lokality, ve které hledáte školu" className="form-control" />
               </Col>
               <Col md={2} xs={6}>
                 <label htmlFor="type">Typ školy</label>

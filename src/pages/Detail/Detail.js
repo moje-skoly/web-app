@@ -72,7 +72,7 @@ export default class Detail extends Component {
       <div className={styles.detailPage}>
         <Grid>
           <Row>
-            <Col md={6} mdOffset={3} sm={10} smOffset={1}>
+            <Col md={8} mdOffset={2} sm={10} smOffset={1}>
               {data}
             </Col>
           </Row>
