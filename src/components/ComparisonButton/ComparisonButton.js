@@ -17,13 +17,18 @@ export default class ComparisonButton extends Component {
     school: PropTypes.object.isRequired,
     isIncluded: PropTypes.bool,
     remove: PropTypes.func.isRequired,
-    add: PropTypes.func.isRequired
+    add: PropTypes.func.isRequired,
+    onClick: PropTypes.func
   };
 
   toggle = () => {
-    const { isIncluded, add, remove } = this.props;
+    const { isIncluded, add, remove, onClick } = this.props;
     const toggle = isIncluded === false ? add : remove;
     toggle();
+
+    if (!!onClick) {
+      onClick();
+    }
   };
 
   render() {

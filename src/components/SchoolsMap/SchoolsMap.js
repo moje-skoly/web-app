@@ -19,6 +19,17 @@ export default class SchoolsMap extends Component {
     allowZoom: PropTypes.bool
   }
 
+  /**
+   * @param  {latLng}
+   * @return {{ lat: Number, lon: Number }}
+   */
+  latLng = (position) => {
+    return {
+      lat: Number(position.lat),
+      lon: Number(position.lon)
+    };
+  }
+
   render() {
     const {
       schools,
@@ -57,7 +68,7 @@ export default class SchoolsMap extends Component {
     return (
       <Map
         className={styles.map}
-        center={mapCenter}
+        center={this.latLng(mapCenter)}
         zoom={zoom}
         maxZoom={allowZoom ? 16 : zoom}
         minZoom={allowZoom ? 5 : zoom}
@@ -66,11 +77,11 @@ export default class SchoolsMap extends Component {
           url={'http://{s}.tile.osm.org/{z}/{x}/{y}.png'}
           attribution={'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}
           />
-        {filteredSchools.map(school => (
+        {filteredSchools.map((school, index) => (
           !!school.metadata.address.location &&
           (<Marker
-            position={school.metadata.address.location}
-            key={school._id}
+            position={this.latLng(school.metadata.address.location)}
+            key={index}
             onClick={onClick(school)}>
             {!!school.metadata.name &&
               (<Popup>
@@ -78,8 +89,9 @@ export default class SchoolsMap extends Component {
             </Popup>)}
           </Marker>)
         ))}
+
         {!!centerTitle && !!mapCenter && (
-          <Marker position={mapCenter} icon={icon} key={-1}>
+          <Marker position={this.latLng(mapCenter)} icon={icon} key={-1}>
               <Popup>
                 <strong>{centerTitle}</strong>
               </Popup>

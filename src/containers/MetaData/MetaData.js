@@ -21,7 +21,9 @@ export default class MetaData extends Component {
         </Col>
         <Col xs={10}>
           <p>
-            {address.street}<br />
+            {!!address.street && (
+              <span>{address.street} <br /></span>
+            )}
             {address.city}<br />
             {address.postalCode}
           </p>
