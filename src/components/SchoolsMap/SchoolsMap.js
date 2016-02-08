@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './SchoolsMap.less';
 
+
 const hasPositon = school => (
   school.metadata.address !== undefined
     && school.metadata.address.location !== undefined
@@ -45,6 +46,13 @@ export default class SchoolsMap extends Component {
     // default position is the center of Prague and a bit unzoomed
     const mapCenter = center !== null ? center : { lat: 50.0803197, lon: 14.4155353 };
     const zoom = filteredSchools.length > 0 ? 12 : 10;
+    const icon = window.L.icon({
+      iconUrl: require('../../theme/images/marker-icon.png'),
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
 
     return (
       <Map
@@ -71,7 +79,7 @@ export default class SchoolsMap extends Component {
           </Marker>)
         ))}
         {!!centerTitle && !!mapCenter && (
-          <Marker position={mapCenter} key={-1} opacity={0.4}>
+          <Marker position={mapCenter} icon={icon} key={-1}>
               <Popup>
                 <strong>{centerTitle}</strong>
               </Popup>

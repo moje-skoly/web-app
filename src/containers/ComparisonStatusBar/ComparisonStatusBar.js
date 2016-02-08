@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 
@@ -24,15 +25,31 @@ export default class ComparisonStatusBar extends Component {
     if (schoolsCount >= 1) { compare(schoolIds); }
   };
 
-  render() {
+  renderButton() {
     const { schoolsCount } = this.props;
     const style = require('./ComparisonStatusBar.less');
     const disabled = schoolsCount <= 1;
-
     return (
-      <button className={disabled ? style.empty : style.ready} onClick={this.goToComparison} disabled={disabled}>
+      <button className={disabled ? style.empty : style.ready} onClick={this.goToComparison}>
         Porovnání {schoolsCount} škol
       </button>
+    );
+  }
+
+  render() {
+    const { schoolsCount } = this.props;
+    if (schoolsCount > 1) {
+      return this.renderButton();
+    }
+
+    const tooltip = (
+      <Tooltip id={'tooltip'}>Přidejte alespoň dvě školy k porovnání.</Tooltip>
+    );
+
+    return (
+      <OverlayTrigger placement="top" overlay={tooltip}>
+        {this.renderButton()}
+      </OverlayTrigger>
     );
   }
 
