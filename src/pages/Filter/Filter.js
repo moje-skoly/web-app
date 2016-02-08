@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { select as selectPreview, unselect as unselectPreview } from '../../redux/modules/preview';
+import Sticky from 'react-sticky-position';
 
 import SchoolFilter from '../../containers/SchoolFilter/SchoolFilter';
 import SchoolsList from '../../containers/SchoolsList/SchoolsList';
@@ -82,7 +83,9 @@ export default class Filter extends Component {
               <div className={styles.map}>
                 <SchoolsMap schools={unitsOnMap} select={this.selectSchool} center={center} centerTitle={address} />
               </div>
-              {children}
+              <Sticky computeWidth style={{ top: 20 }}>
+                {children}
+              </Sticky>
             </Col>
           </Row>
         </Grid>

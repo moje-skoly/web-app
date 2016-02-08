@@ -37,7 +37,8 @@ const getUnitType = (type) => {
       const ids = schools.map(school => school._id).join(',');
       dispatch(pushState(null, `/comparison/${ids}`));
     },
-    remove: (school) => dispatch(removeFromComparison(school))
+    remove: (school) => dispatch(removeFromComparison(school)),
+    returnToHomepage: () => dispatch(pushState(null, '/'))
   })
 )
 export default class Comparison extends Component {
@@ -50,7 +51,8 @@ export default class Comparison extends Component {
     schoolIds: PropTypes.array.isRequired,
     params: PropTypes.object,
     load: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired
+    remove: PropTypes.func.isRequired,
+    returnToHomepage: PropTypes.func.isRequired
   };
 
   state = {
@@ -66,13 +68,15 @@ export default class Comparison extends Component {
       load(schoolIds); // load the comparison data again according to the URL params
     }
 
-    setTimeout(() => this.checkArrowsNecessity(), 2000);
     window.addEventListener('resize', this.checkArrowsNecessity);
+    this.checkArrowsNecessity();
   };
 
   componentWillReceiveProps = (newProps) => {
     // reflect URL changes
-    if (this.props.params.schoolIds !== newProps.params.schoolIds) {
+    if (this.props.params.schoolIds !== newProps.params.schoolIds
+        || this.props.loaded === false) {
+
       const { loaded, load, schoolIds, schools } = newProps;
       const loadedSchoolsIds = schools.map(school => school._id);
 
@@ -83,8 +87,10 @@ export default class Comparison extends Component {
         const { remove } = this.props;
         schools.filter(school => schoolIds.indexOf(school._id) === -1).map(remove);
       }
+    }
 
-      setTimeout(this.checkArrowsNecessity, 1000);
+    if (this.props.schools.length !== newProps.schools.length) {
+      this.checkArrowsNecessity();
     }
   };
 
@@ -92,15 +98,15 @@ export default class Comparison extends Component {
     window.removeEventListener('resize', this.checkArrowsNecessity);
   };
 
-  checkArrowsNecessity() {
-    if (!!this.table &&
-        !!this.page &&
-          this.table.getBoundingClientRect().width <= this.page.getBoundingClientRect().width) {
+  checkArrowsNecessity = () => {
+    if (!!this.refs.table &&
+        !!this.refs.page &&
+          this.refs.table.getBoundingClientRect().width <= this.refs.page.getBoundingClientRect().width) {
       this.setState({
         showArrows: false,
         focusedSchool: 0
       });
-    } else {
+    } else if (this.state.showArrows === false) {
       this.setState({
         showArrows: true
       });
@@ -142,8 +148,14 @@ export default class Comparison extends Component {
   }
 
   removeSchool = (removedSchool) => {
-    const { schools, compare } = this.props;
-    compare(schools.filter(school => school._id !== removedSchool._id));
+    const { schools, compare, returnToHomepage } = this.props;
+    const remainingSchools = schools.filter(school => school._id !== removedSchool._id);
+
+    if (remainingSchools.length === 0) {
+      returnToHomepage();
+    } else {
+      compare(remainingSchools);
+    }
   };
 
   renderLoading() {
@@ -173,7 +185,7 @@ export default class Comparison extends Component {
       .reduce((acc, item) => acc.indexOf(item) < 0 ? [...acc, item] : acc, []);
 
     return (
-      <table className={styles.comparisonTable} ref={(ref) => this.table = ref}>
+      <table className={styles.comparisonTable} ref={'table'}>
         <tbody>
         {/* Metadata */}
         <tr>
@@ -202,8 +214,8 @@ export default class Comparison extends Component {
         </tr>
 
         <tr>
-          {schools.map((school) => (
-            <td>
+          {schools.map((school, index) => (
+            <td key={'school-' + index}>
               {this.missingInfoWarning(school)}
             </td>
           ))}
@@ -266,7 +278,7 @@ export default class Comparison extends Component {
         {sections.map((section, sectionId) => {
           const answer = (!section || !section.information) ? null : section.information.find(({ key }) => key === question);
           return (
-            <td className={!answer ? styles.missing : null}>
+            <td className={!answer ? styles.missing : null} key={'section-' + sectionId}>
               <p className={styles.question}>{question}{':'}</p>
               <p className={styles.answer}>{!answer ? '-' : answer.value}</p>
             </td>
@@ -281,7 +293,7 @@ export default class Comparison extends Component {
     const { focusedSchool, showArrows } = this.state;
 
     return (
-      <div className={styles.comparisonPage} ref={(ref) => this.page = ref}>
+      <div className={styles.comparisonPage} ref={'page'}>
         <Grid>
           <Row>
             <Col xs={12}>

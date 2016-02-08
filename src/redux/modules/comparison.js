@@ -23,10 +23,11 @@ export default function comparison(state = initialState, action = {}) {
       schools: [...state.schools, action.school]
     };
   case REMOVE:
+    const remaining = state.schools.filter(school => school._id !== action.school._id);
     return {
       error: false,
-      loaded: true,
-      schools: state.schools.filter(school => school._id !== action.school._id)
+      loaded: remaining.length > 0,
+      schools: remaining
     };
   case LOAD:
     return {
