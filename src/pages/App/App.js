@@ -45,7 +45,7 @@ export default class App extends Component {
               <Col xs={3}>
                 <h1><IndexLink to="/"><img src={logoImg} alt="Moje školy"/></IndexLink></h1>
               </Col>
-              <Col xs={9} className="text-right">
+              <Col xs={9} className={styles.menuRight}>
                 {this.menu('')}
               </Col>
             </Row>
@@ -68,7 +68,7 @@ export default class App extends Component {
                   <img src={motejlImg} alt="Fond Otakara Motejla"/>
                 </a>
               </Col>
-              <Col md={4} xs={12}>
+              <Col md={4} xs={12} className={styles.menuBottom}>
                 {this.menu('pull-right')}
               </Col>
             </Row>

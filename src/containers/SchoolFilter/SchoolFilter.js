@@ -71,9 +71,9 @@ export default class SchoolFilter extends Component {
 
   getResultCountable = (resultCount) => {
     if (resultCount === 0 || resultCount > 4) {
-      return 'ků';
+      return 'nejbližších škol';
     }
-    return resultCount > 1 ? 'ky' : 'ek';
+    return resultCount > 1 ? 'nejbližší školy' : 'nejbližší škola';
   };
 
   load = () => {
@@ -98,7 +98,7 @@ export default class SchoolFilter extends Component {
       <div>
         <p className={'text-right'}>
           <span className={styles.countTag}>
-            {schoolsCount} výsled{this.getResultCountable(schoolsCount)}
+            {schoolsCount} {this.getResultCountable(schoolsCount)}
           </span>
           <button className={styles.toggleSettings} onClick={this.toggleFilter}>
             {'podrobné filtrování'}

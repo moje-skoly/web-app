@@ -50,7 +50,7 @@ export default class HomepageSarch extends Component {
             <Row>
               <Col md={8} xs={12}>
                 <label htmlFor="loc">Vaše adresa</label>
-                <input id="loc" type="text" value={loc} onChange={this.changeLoc} placeholder="zadejte adresu lokality, ve které hledáte školu" className="form-control" />
+                <input id="loc" type="text" value={loc} onChange={this.changeLoc} placeholder="zadejte adresu vašeho bydliště nebo lokalitu, ve které hledáte školu" className="form-control" />
               </Col>
               <Col md={2} xs={6}>
                 <label htmlFor="type">Typ školy</label>

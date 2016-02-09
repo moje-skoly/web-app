@@ -56,8 +56,9 @@ export default class Filter extends Component {
 
   render() {
     const { schools, children, center, params, addresses } = this.props;
-    const { address, schoolType } = params;
-    const filteredAddresses = addresses.filter(addr => addr !== address);
+    const { schoolType } = params;
+    const filteredAddresses = addresses.filter((addr, index) => index !== 0);
+    const address = addresses[0];
     const unitsOnMap = schools.map(school => {
       const unitOfType = school.units.find(unit => unit.unitType === schoolType);
       if (!!unitOfType && !!unitOfType.metadata.address.location) {
@@ -73,8 +74,8 @@ export default class Filter extends Component {
         <Grid>
           <Row>
             <Col sm={6}>
-              <h1 className={styles.underlinedTitle}>{'Školy v oblasti'}</h1>
-              <p className={styles.radiusParagraph}>{address} {address.length > 0 && ' a okolí'}</p>
+              <h1 className={styles.underlinedTitle}>{'Nejbližší školy'}</h1>
+              <p className={styles.radiusParagraph}>od místa {address}</p>
               <SchoolFilter address={address} schoolType={schoolType} />
               <SuggestedAddresses currentAddress={address} addresses={filteredAddresses} type={schoolType} />
               <SchoolsList schools={schools} select={this.selectSchool} />
