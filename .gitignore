@@ -28,3 +28,4 @@ node_modules
 
 # Webpack assets
 webpack-assets.json
+src/helpers/ApiClient.sublime-workspace
