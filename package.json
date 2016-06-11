@@ -24,7 +24,7 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "forever ./bin/server.js",
-    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+    "build": "node_modules/.bin/webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
