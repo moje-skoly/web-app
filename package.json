@@ -24,7 +24,7 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "forever ./bin/server.js",
-    "restartServer": "node_modules/.bin/forever restart ./bin/server.js -p /tmp -pidFile=web-app.pid"
+    "restartServer": "node_modules/.bin/forever restart ./bin/server.js -p /tmp -pidFile=web-app.pid",
     "build": "node_modules/.bin/webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
