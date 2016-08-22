@@ -6,7 +6,7 @@ const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
   // Prepend host and port of the API server to the path.
-  return 'http://' + config.apiHost + ':' + config.apiPort + adjustedPath;
+  return 'http://' + config.apiHost + adjustedPath;
 }
 
 /*
