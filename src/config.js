@@ -7,7 +7,7 @@ module.exports = {
   isProduction: (process.env.NODE_ENV || 'production') === 'production',
   host: process.env.HOST || '0.0.0.0',
   port: process.env.PORT || 80,
-  apiHost: process.env.APIHOST || 'api.mojeskoly.cz',
+  apiHost: process.env.APIHOST || 'www.mojeskoly.cz/api',
   apiPort: process.env.APIPORT || 80,
   app: {
     title: title,
